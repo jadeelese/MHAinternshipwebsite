@@ -1,0 +1,74 @@
+name: Add a listing
+description: Suggest a fellowship or internship for the list.
+title: "New listing: "
+labels: ["add-listing"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a program. Submissions are reviewed before they go live.
+        Only three fields are required — the rest helps speed up the review.
+
+  - type: input
+    id: title
+    attributes:
+      label: Role / program title
+      description: The exact name of the role or program. Must indicate a program (e.g. "Summer Associate," "Administrative Fellowship").
+      placeholder: "e.g. Administrative Fellowship, Summer Associate — Healthcare"
+    validations:
+      required: true
+
+  - type: input
+    id: employer
+    attributes:
+      label: Employer / organization
+      placeholder: "e.g. UCLA Health, McKinsey, Verily"
+    validations:
+      required: true
+
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL
+      description: The official program page or job posting (must be reachable).
+      placeholder: "https://..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Consulting
+        - Operations & admin
+        - Pharma & biotech
+        - Payers & insurance
+        - Healthcare tech
+        - Product & analytics
+        - Policy & public health
+        - Post-grad fellowship
+        - Not sure — reviewer will pick
+      default: 8
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location (city, state) or "Remote"
+      description: Onsite and hybrid listings must be in California. Remote may be anywhere.
+      placeholder: "e.g. Los Angeles, CA · San Francisco, CA · Remote"
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Application deadline (if known)
+      placeholder: "e.g. Oct 15, 2026 · Rolling · Undated"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Why does this belong on the list? Who at your program went there?
+      placeholder: "Optional — one or two sentences max."
