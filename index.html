@@ -73,10 +73,9 @@
             <option value="remote">Remote</option>
           </select>
         </label>
-        <button id="more-filters-btn" class="ghost" type="button" aria-expanded="false">More filters</button>
       </div>
 
-      <div id="more-filters" class="more-filters" hidden>
+      <div class="filters" role="region" aria-label="More filters">
         <label class="filter">
           <span>City</span>
           <select id="f-city"><option value="all">All</option></select>
@@ -153,62 +152,45 @@
       <div class="prose">
         <p>Created for Master of Healthcare Administration students in California throughout all phases of their academic journey.</p>
 
-        <p>Inspired by <a href="https://fellowsource.com" target="_blank" rel="noopener">FellowSource</a>, a PharmD fellowship site created by Mark Kamel. This site serves to enhance exposure to opportunities for MHA students as internships and fellowships open up to this new degree program as a navigation resource for a landscape traditionally built for MBA and MPH students.</p>
+        <p>Inspired by <a href="https://fellowsource.com" target="_blank" rel="noopener">FellowSource</a>, a PharmD fellowship site created by Mark Kamel. This site serves to enhance exposure to internship and fellowship opportunities for MHA students as a resource for navigating a landscape traditionally built for MBA and MPH students.</p>
 
         <h3>Dashboard Requirements</h3>
         <p>aka eligibility rules; what counts as a listing:</p>
         <ul>
-          <li><strong>Program, not permanent role:</strong> a structured internship or fellowship with a defined length and end date. No regular job postings.</li>
-          <li><strong>Topic:</strong> any role an MHA student can realistically land, across industries.</li>
-          <li><strong>Location:</strong> onsite and hybrid must be in California. Remote may be anywhere.</li>
-          <li><strong>Conference travel</strong> (when required): the employer covers travel + lodging + fees.</li>
+          <li>Program, not permanent role: a structured internship or fellowship with a defined length and end date. No regular job postings.</li>
+          <li>Topic: any role an MHA student can realistically land, across industries. "Realistically" means a program that explicitly recruits advanced-degree holders or that CA MHA graduates have publicly entered in recent cycles — not an inferred fit.</li>
+          <li>Location: onsite and hybrid must be in California. Remote may be anywhere.</li>
+          <li>Conference travel (if required): the employer covers travel + lodging + fees.</li>
         </ul>
 
         <h3>How to use it</h3>
         <ul>
-          <li><strong>Browse</strong> is the list. Sort is by deadline. Three quick filters at the top; City and Pay in the drawer. Pick <strong>In-program</strong> to hide post-grad fellowships.</li>
-          <li><strong>My Dashboard</strong> is your personal tracker. Check each requirement as you finish it.</li>
-          <li><strong>Just added</strong> chips mark listings added in the last 14 days.</li>
+          <li>Browse is the list. Sort is by deadline. Three quick filters at the top; City and Pay below them. Pick In-program to hide post-grad fellowships.</li>
+          <li>My Dashboard is your personal tracker. Check each requirement as you finish it.</li>
+          <li>Just added flags listings added in the last 14 days.</li>
           <li>Tracking is saved <em>in this browser only</em>. Export a JSON to move it to another device.</li>
         </ul>
 
         <h3>Consulting pathways</h3>
-        <p>Most consulting firms recruit summer interns through two parallel programs — one for undergraduates, one for advanced-degree candidates (MBA, MD, JD, PhD). Both appear on Browse. Discuss with your campus career center which one fits your profile, or apply to both.</p>
+        <p>Most consulting firms recruit summer interns through two parallel programs — undergraduate and MBA/advanced-degree candidates (MD, JD, PhD). Discuss with your campus career center which track aligns with your background and their pathways, or apply to both.</p>
 
-        <p><strong>Consulting application periods are cyclical</strong> — they occur at roughly the same time each year with similar requirements and pathways. If this is on your radar, monitor the firm's site through the application window.</p>
+        <p>Consulting application periods are cyclical — they occur at roughly the same time each year with similar requirements and pathways. If this is on your radar and you are enrolled in a two-year MHA program or an MHA program that begins at non-traditional times in the academic year, monitor application periods closely as consulting summer internships typically take place the summer before graduation and are applied for the year prior.</p>
 
-        <p><strong>Consulting summer internships</strong> typically take place the summer before graduation and are applied for the year prior to that summer.</p>
+        <p>The major consulting firms CA MHA students most often target:</p>
+        <ul>
+          <li>The Big Three (MBB) — McKinsey &amp; Company, Boston Consulting Group (BCG), and Bain &amp; Company.</li>
+          <li>The Big Four — Deloitte, PwC, EY (Ernst &amp; Young), and KPMG.</li>
+        </ul>
 
-        <p><strong>Firms may recruit only from select partner schools.</strong> Speak with your career center to find out what consulting firms your campus has a recruitment relationship with.</p>
-
-        <table class="entry-table">
-          <thead>
-            <tr>
-              <th>Firm</th>
-              <th>Advanced-degree track (summer intern)</th>
-              <th>Undergraduate track (summer intern)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>McKinsey &amp; Company</td><td class="target">Summer Associate</td><td>Summer Business Analyst</td></tr>
-            <tr><td>BCG</td><td class="target">Summer Consultant</td><td>Summer Associate</td></tr>
-            <tr><td>Bain &amp; Company</td><td class="target">Summer Associate</td><td>Associate Consultant Intern</td></tr>
-            <tr><td>Deloitte</td><td class="target">LSHC Summer Associate / Summer Scholar</td><td>Business Analyst / BTA / Discovery Intern</td></tr>
-            <tr><td>PwC</td><td class="target">Health Industries Senior Associate Intern</td><td>Associate Intern</td></tr>
-            <tr><td>EY</td><td class="target">Health Sciences Senior Intern</td><td>Staff Intern</td></tr>
-            <tr><td>KPMG</td><td class="target">Healthcare Senior Associate Intern</td><td>Associate Intern</td></tr>
-            <tr><td>Accenture</td><td class="target">Health Consultant Intern</td><td>Health Analyst Intern</td></tr>
-          </tbody>
-        </table>
-        <p class="dim tiny">Role names shift. Verify on the firm's direct site.</p>
+        <p>Firms may recruit only from select partner schools. Speak with your career center to find out what consulting firms your campus has a recruitment relationship with.</p>
 
         <h3>Verify before you apply</h3>
         <p>Program deadlines move every cycle. Every listing on this site carries a <em>last verified</em> date; always double-check the official posting before you commit.</p>
 
         <h3>Add to the list</h3>
-        <p>Found a program that should be here? <a href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+" target="_blank" rel="noopener">Submit it →</a>. Submissions are reviewed before they go live.</p>
+        <p>Found a program that should be here? <a href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+" target="_blank" rel="noopener">Submit it</a>. Submissions are reviewed before they go live.</p>
 
-        <p class="dim">v2.3 · <a href="https://github.com/jadeelese/MHAinternshipwebsite" rel="noopener" target="_blank">Source on GitHub</a></p>
+        <p class="dim">v2.4 · <a href="https://github.com/jadeelese/MHAinternshipwebsite" rel="noopener" target="_blank">Source on GitHub</a></p>
       </div>
     </section>
 

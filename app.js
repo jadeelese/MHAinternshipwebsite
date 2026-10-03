@@ -323,7 +323,7 @@ function renderHeadline() {
   const days = d === 0 ? "today" : d === 1 ? "in <em>1 day</em>" : `in <em>${d} days</em>`;
   // Employer name picks up the accent green (same emphasis as "N days").
   el.innerHTML = `${escapeHtml(l.title)} <span style="color:var(--accent-strong);font-size:0.85em;">·&nbsp;${escapeHtml(l.organization)}</span> — ${days}`;
-  sub.textContent = `Upcoming deadline — ${dateFmt(l.application_deadline)}.`;
+  sub.textContent = `Due ${dateFmt(l.application_deadline)}.`;
 }
 
 function renderList() {

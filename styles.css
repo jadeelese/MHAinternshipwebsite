@@ -95,7 +95,7 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   color: var(--accent);
   flex-shrink: 0;
 }
-.brand-name { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
+.brand-name { font-size: 17px; font-weight: 600; letter-spacing: -0.005em; }
 .brand-dot {
   color: var(--accent);
   font-weight: 700;
@@ -146,10 +146,16 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
 .next-deadline {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(28px, 4.2vw, 44px);
-  line-height: 1.15;
+  font-size: clamp(20px, 3vw, 30px);
+  line-height: 1.2;
   margin: 0 0 10px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 760px) {
+  .next-deadline { white-space: normal; font-size: clamp(20px, 5vw, 26px); }
 }
 .next-deadline em {
   font-style: italic;

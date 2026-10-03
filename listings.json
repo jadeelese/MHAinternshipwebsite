@@ -81,7 +81,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["Online application","CV","Transcript","Personal statement","3 letters of recommendation","Interview"],
-      "source_url": "https://www.ucsfhealth.org/education", "url_kind": "generic",
+      "source_url": "https://administrativefellowship.ucsf.edu", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "scripps-admin-fellowship", "title": "Administrative Fellowship", "organization": "Scripps Health",
@@ -114,7 +114,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Application form","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.sutterhealth.org/careers", "url_kind": "generic",
+      "source_url": "https://jobs.sutterhealth.org/", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "memorialcare-admin-fellowship", "title": "Administrative Fellowship", "organization": "MemorialCare",
@@ -169,7 +169,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://health.ucdavis.edu/jobs/", "url_kind": "generic",
+      "source_url": "https://health.ucdavis.edu/join-the-team", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "ucirvine-health-admin-fellowship", "title": "Administrative Fellowship", "organization": "UC Irvine Health",
@@ -180,7 +180,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.ucihealth.org/about-us/careers", "url_kind": "generic",
+      "source_url": "https://jobs.uci.edu/careers-home/jobs", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "ucsd-health-admin-fellowship", "title": "Administrative Fellowship", "organization": "UC San Diego Health",
@@ -202,7 +202,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.keckmedicine.org/careers/", "url_kind": "generic",
+      "source_url": "https://www.keckmedicine.org/administrative-fellowship/", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "loma-linda-admin-fellowship", "title": "Administrative Fellowship", "organization": "Loma Linda University Health",
@@ -213,7 +213,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://home.llu.edu/employment", "url_kind": "generic",
+      "source_url": "https://careers.lluh.org", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "city-of-hope-admin-fellowship", "title": "Administrative Fellowship", "organization": "City of Hope",
@@ -247,7 +247,7 @@
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Interview"],
       "notes": "Largest publicly-operated US health plan; Medicaid managed care exposure.",
-      "source_url": "https://careers.lacare.org/", "url_kind": "generic",
+      "source_url": "https://jobs.lacare.org", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "blue-shield-ca-intern", "title": "Summer Internship — Strategy / Health Solutions", "organization": "Blue Shield of California",
@@ -258,7 +258,7 @@
       "timing_guidance": "Apply fall–winter for the following summer.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Interview"],
-      "source_url": "https://jobs.blueshieldca.com/", "url_kind": "generic",
+      "source_url": "https://careers.blueshieldca.com", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "caloptima-intern", "title": "Summer Internship", "organization": "CalOptima Health",
@@ -313,7 +313,7 @@
       "timing_guidance": "Rolling; apply early fall for the following summer.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral interviews"],
-      "source_url": "https://careers.unitedhealthgroup.com/students-jobs", "url_kind": "generic",
+      "source_url": "https://careers.unitedhealthgroup.com/", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "molina-intern", "title": "Summer Internship", "organization": "Molina Healthcare",
@@ -346,7 +346,7 @@
       "timing_guidance": "Apply late winter for the following summer.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Interview"],
-      "source_url": "https://www.partnershiphp.org/Careers/", "url_kind": "generic",
+      "source_url": "https://www.partnershiphp.org/about/careers", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "mckinsey-summer-ba", "title": "Summer Business Analyst — Healthcare", "organization": "McKinsey & Company",
@@ -456,7 +456,7 @@
       "timing_guidance": "Undergraduate-named summer intern program in Life Sciences & Health Care Advisory.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Behavioral interviews"],
-      "source_url": "https://www2.deloitte.com/us/en/careers/students.html", "url_kind": "generic",
+      "source_url": "https://www.deloitte.com/us/en/careers/student-careers.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "deloitte-lshc-summer-associate-healthcare", "title": "LSHC Advisory Summer Associate — Healthcare", "organization": "Deloitte",
@@ -468,7 +468,7 @@
       "partnership": "unknown", "tier": 1,
       "other_requirements": ["Online application","CV","Transcript","Behavioral interviews"],
       "notes": "Named program — distinct from Deloitte's Summer Scholar functional tracks.",
-      "source_url": "https://www2.deloitte.com/us/en/careers/students.html", "url_kind": "generic",
+      "source_url": "https://www.deloitte.com/us/en/careers/student-careers.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "deloitte-summer-scholar-fos", "title": "Summer Scholar — Functional and Operations Strategy", "organization": "Deloitte",
@@ -479,7 +479,7 @@
       "timing_guidance": "Deloitte's advanced-degree Summer Scholar track focused on functional and operations strategy; MHA students are explicitly in scope.",
       "partnership": "unknown", "tier": 1,
       "other_requirements": ["Online application","CV","Transcript","Behavioral interviews"],
-      "source_url": "https://www2.deloitte.com/us/en/careers/students.html", "url_kind": "generic",
+      "source_url": "https://www.deloitte.com/us/en/careers/student-careers.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "deloitte-summer-scholar-strategy", "title": "Summer Scholar — Strategy", "organization": "Deloitte",
@@ -490,7 +490,7 @@
       "timing_guidance": "Advanced-degree Strategy track within Deloitte's Summer Scholar program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Behavioral interviews"],
-      "source_url": "https://www2.deloitte.com/us/en/careers/students.html", "url_kind": "generic",
+      "source_url": "https://www.deloitte.com/us/en/careers/student-careers.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "deloitte-summer-scholar-human-capital", "title": "Summer Scholar — Human Capital", "organization": "Deloitte",
@@ -501,7 +501,7 @@
       "timing_guidance": "Advanced-degree Human Capital track within Deloitte's Summer Scholar program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Behavioral interviews"],
-      "source_url": "https://www2.deloitte.com/us/en/careers/students.html", "url_kind": "generic",
+      "source_url": "https://www.deloitte.com/us/en/careers/student-careers.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "deloitte-lshc-discovery-intern", "title": "Life Sciences & Health Care Discovery Internship", "organization": "Deloitte",
@@ -512,7 +512,7 @@
       "timing_guidance": "Discovery program for underclassmen interested in LSHC; a feeder for the full Summer Scholar program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Transcript","Behavioral interviews"],
-      "source_url": "https://www2.deloitte.com/us/en/careers/students.html", "url_kind": "generic",
+      "source_url": "https://www.deloitte.com/us/en/careers/student-careers.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "pwc-health-industries-associate-intern", "title": "Health Industries Advisory Associate Intern", "organization": "PwC",
@@ -523,7 +523,7 @@
       "timing_guidance": "Undergraduate-named summer intern program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral & case interviews"],
-      "source_url": "https://www.pwc.com/us/en/careers/campus.html", "url_kind": "generic",
+      "source_url": "https://www.pwc.com/us/en/careers/student.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "pwc-health-industries-sr-associate-intern", "title": "Health Industries Senior Associate Intern — MBA / Advanced Degree", "organization": "PwC",
@@ -534,7 +534,7 @@
       "timing_guidance": "Advanced-degree summer intern program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral & case interviews"],
-      "source_url": "https://www.pwc.com/us/en/careers/campus.html", "url_kind": "generic",
+      "source_url": "https://www.pwc.com/us/en/careers/student.html", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "ey-health-sciences-staff-intern", "title": "Health Sciences & Wellness Staff Intern", "organization": "EY",
@@ -545,7 +545,7 @@
       "timing_guidance": "Undergraduate-named summer intern program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral interviews"],
-      "source_url": "https://www.ey.com/en_us/careers/students", "url_kind": "generic",
+      "source_url": "https://www.ey.com/en_us/careers", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "ey-health-sciences-senior-intern", "title": "Health Sciences & Wellness Senior Intern — MBA / Advanced Degree", "organization": "EY",
@@ -556,7 +556,7 @@
       "timing_guidance": "Advanced-degree summer intern program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral interviews"],
-      "source_url": "https://www.ey.com/en_us/careers/students", "url_kind": "generic",
+      "source_url": "https://www.ey.com/en_us/careers", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "kpmg-healthcare-associate-intern", "title": "Healthcare Advisory Associate Intern", "organization": "KPMG",
@@ -589,7 +589,7 @@
       "timing_guidance": "Undergraduate-named summer intern program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral interviews"],
-      "source_url": "https://www.accenture.com/us-en/careers/local/students-interns", "url_kind": "generic",
+      "source_url": "https://www.accenture.com/us-en/careers/life-at-accenture", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "accenture-health-consultant-intern", "title": "Health Industry Consultant Intern — MBA / Advanced Degree", "organization": "Accenture",
@@ -600,7 +600,7 @@
       "timing_guidance": "Advanced-degree summer intern program.",
       "partnership": "unknown", "tier": 2,
       "other_requirements": ["Online application","CV","Behavioral interviews"],
-      "source_url": "https://www.accenture.com/us-en/careers/local/students-interns", "url_kind": "generic",
+      "source_url": "https://www.accenture.com/us-en/careers/life-at-accenture", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "chartis-summer-intern", "title": "Summer Intern — Healthcare Consulting", "organization": "Chartis Group",
@@ -765,7 +765,7 @@
       "timing_guidance": "Rolling.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Interview"],
-      "source_url": "https://collectivehealth.com/careers", "url_kind": "generic",
+      "source_url": "https://jobs.collectivehealth.com", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "doximity-ops-intern", "title": "Business Operations Summer Intern", "organization": "Doximity",
@@ -776,7 +776,7 @@
       "timing_guidance": "Rolling; non-engineering roles.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Interview"],
-      "source_url": "https://press.doximity.com/careers/", "url_kind": "generic",
+      "source_url": "https://workat.doximity.com/positions", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-10-03" },
 
     { "id": "hinge-health-mba-intern", "title": "MBA / Advanced Degree Summer Intern", "organization": "Hinge Health",
@@ -798,7 +798,7 @@
       "timing_guidance": "Rolling throughout the year; Medi-Cal policy and operations exposure.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["State application","CV","Transcript","Interview"],
-      "source_url": "https://www.dhcs.ca.gov/jobs/Pages/default.aspx", "url_kind": "generic",
+      "source_url": "https://www.dhcs.ca.gov/dhcs-careers", "url_kind": "generic",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "cdph-intern", "title": "Summer Internship", "organization": "California Department of Public Health",
@@ -809,7 +809,7 @@
       "timing_guidance": "Apply winter for the following summer.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["State application","CV","Transcript","Interview"],
-      "source_url": "https://www.cdph.ca.gov/Programs/OWPP/Pages/Internships.aspx", "url_kind": "program",
+      "source_url": "https://www.cdph.ca.gov/Pages/Jobs.aspx", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "la-county-dhs-intern", "title": "Administrative Internship", "organization": "LA County Department of Health Services",
@@ -831,7 +831,7 @@
       "timing_guidance": "National VA program with CA host sites; apply winter of your final year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["USAJobs application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.va.gov/healthcareleadership/", "url_kind": "program",
+      "source_url": "https://www.va.gov/internships-and-fellowships/graduate-healthcare-administration-training-program/", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "va-west-la-admin-fellowship", "title": "Health Administrative Fellowship", "organization": "Veterans Health Administration (VA West LA)",
@@ -842,7 +842,7 @@
       "timing_guidance": "National VA program with West LA site; apply winter of your final year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["USAJobs application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.va.gov/healthcareleadership/", "url_kind": "program",
+      "source_url": "https://www.va.gov/internships-and-fellowships/graduate-healthcare-administration-training-program/", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "chcf-fellowship", "title": "Health Care Leadership Program Fellow", "organization": "California Health Care Foundation",
@@ -853,7 +853,7 @@
       "timing_guidance": "Apply early spring; focused on CA safety-net leadership.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["Online application","CV","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.chcf.org/programs/health-care-leadership-program/", "url_kind": "program",
+      "source_url": "https://www.chcf.org", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "california-endowment-fellowship", "title": "Health Equity Fellowship", "organization": "The California Endowment",
