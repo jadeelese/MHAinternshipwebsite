@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MHA Internships & Fellowships — UCLA</title>
-  <meta name="description" content="The list of fellowships and internships a UCLA MHA student should actually apply to this year — tracked from deadline to offer." />
+  <title>MHA Internships &amp; Fellowships · CA</title>
+  <meta name="description" content="The list of fellowships and internships, by deadline. For California MHA students." />
 
-  <!-- Open Graph (share card) -->
-  <meta property="og:title" content="MHA Internships & Fellowships — UCLA" />
-  <meta property="og:description" content="The list of fellowships and internships a UCLA MHA student should apply to this year." />
+  <meta property="og:title" content="MHA Internships &amp; Fellowships · CA" />
+  <meta property="og:description" content="The list of fellowships and internships, by deadline. For California MHA students." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="og.svg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -24,12 +23,13 @@
           <line x1="10" y1="6" x2="10" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           <circle cx="10" cy="5" r="3.5" fill="currentColor" />
         </svg>
-        <span class="brand-name">MHA Internships</span>
-        <span class="brand-tag">UCLA</span>
+        <span class="brand-name">MHA Internships &amp; Fellowships</span>
+        <span class="brand-dot">·</span>
+        <span class="brand-ca">CA</span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#browse" data-nav="browse">Browse</a>
-        <a href="#dashboard" data-nav="dashboard">My dashboard <span id="nav-badge" class="badge" hidden></span></a>
+        <a href="#dashboard" data-nav="dashboard">My Dashboard<span id="nav-badge" class="badge" hidden></span></a>
         <a href="#about" data-nav="about">About</a>
       </nav>
     </div>
@@ -37,61 +37,49 @@
 
   <main class="wrap">
 
-    <!-- HEADLINE / NEXT DEADLINE -->
     <section id="headline" class="headline" aria-live="polite">
-      <p class="eyebrow">Your next deadline</p>
+      <p class="eyebrow">Next deadline</p>
       <h1 id="next-deadline" class="next-deadline">Loading…</h1>
       <p id="next-deadline-sub" class="next-deadline-sub"></p>
     </section>
 
-    <!-- BROWSE VIEW -->
     <section id="view-browse" class="view" aria-labelledby="browse-heading">
       <div class="filters" role="region" aria-label="Filters">
         <label class="filter">
           <span>Category</span>
           <select id="f-category">
             <option value="all">All</option>
-            <option value="mha_admin">MHA admin</option>
-            <option value="health_tech_nontech">Health tech (non-tech)</option>
+            <option value="in_program">In-program</option>
           </select>
         </label>
         <label class="filter">
           <span>Deadline</span>
           <select id="f-window">
             <option value="all">All</option>
+            <option value="open">Open</option>
+            <option value="rolling">Rolling</option>
             <option value="30">Next 30 days</option>
             <option value="60">Next 60 days</option>
             <option value="90">Next 90 days</option>
+            <option value="closed">Closed this cycle</option>
           </select>
         </label>
         <label class="filter">
-          <span>My status</span>
-          <select id="f-status">
+          <span>Format</span>
+          <select id="f-format">
             <option value="all">All</option>
-            <option value="considering">Considering</option>
-            <option value="applied">Applied</option>
-            <option value="interviewing">Interviewing</option>
-            <option value="offer">Offer</option>
-            <option value="passed">Passed</option>
-            <option value="untracked">Untracked</option>
+            <option value="onsite">Onsite</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="remote">Remote</option>
           </select>
-        </label>
-        <label class="filter check">
-          <input type="checkbox" id="f-postgrad" />
-          <span>Show post-grad fellowships too</span>
         </label>
         <button id="more-filters-btn" class="ghost" type="button" aria-expanded="false">More filters</button>
       </div>
 
       <div id="more-filters" class="more-filters" hidden>
         <label class="filter">
-          <span>Work mode</span>
-          <select id="f-mode">
-            <option value="all">All</option>
-            <option value="onsite">Onsite</option>
-            <option value="hybrid">Hybrid</option>
-            <option value="remote">Remote</option>
-          </select>
+          <span>City</span>
+          <select id="f-city"><option value="all">All</option></select>
         </label>
         <label class="filter">
           <span>Pay</span>
@@ -103,39 +91,44 @@
             <option value="unknown">Unknown</option>
           </select>
         </label>
-        <label class="filter">
-          <span>MHA year</span>
-          <select id="f-year">
-            <option value="all">All</option>
-            <option value="mha_year_1">Year 1</option>
-            <option value="mha_year_2">Year 2</option>
-            <option value="either">Either</option>
-            <option value="post_graduate">Post-graduate</option>
-          </select>
-        </label>
-        <label class="filter">
-          <span>Conference travel</span>
-          <select id="f-travel">
-            <option value="all">Any</option>
-            <option value="yes-or-na">Covered / N/A</option>
-            <option value="hide-no">Hide "not covered"</option>
-          </select>
-        </label>
       </div>
 
       <h2 id="browse-heading" class="section-heading">
-        <span id="count-label">Listings</span>
+        <span id="count-label">Opportunities</span>
         <span class="dim" id="count-num"></span>
       </h2>
 
       <ol id="list" class="list" aria-live="polite"></ol>
-
       <p id="empty" class="empty" hidden>No listings match those filters. Try widening them.</p>
+
+      <div class="add-listing-cta">
+        <h3>Have an internship or fellowship recommendation?</h3>
+        <p>Submissions are reviewed before they go live.</p>
+        <a class="button"
+           href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+"
+           target="_blank" rel="noopener">
+          Add a listing ↗
+        </a>
+      </div>
     </section>
 
-    <!-- DASHBOARD VIEW -->
     <section id="view-dashboard" class="view" hidden aria-labelledby="dashboard-heading">
-      <h2 id="dashboard-heading" class="section-heading">My dashboard</h2>
+      <h2 id="dashboard-heading" class="section-heading">My Dashboard</h2>
+
+      <div class="filters" role="region" aria-label="Dashboard filters">
+        <label class="filter">
+          <span>My status</span>
+          <select id="f-status">
+            <option value="all">All</option>
+            <option value="considering">Considering</option>
+            <option value="in_progress">Application in progress</option>
+            <option value="applied">Applied</option>
+            <option value="interviewing">Interviewing</option>
+            <option value="archive">Archive</option>
+          </select>
+        </label>
+      </div>
+
       <div id="dash-groups"></div>
 
       <div class="danger-zone">
@@ -154,36 +147,68 @@
       </div>
     </section>
 
-    <!-- ABOUT VIEW -->
     <section id="view-about" class="view" hidden aria-labelledby="about-heading">
-      <h2 id="about-heading" class="section-heading">About this list</h2>
+      <h2 id="about-heading" class="section-heading">About this Dashboard</h2>
 
       <div class="prose">
-        <p><strong>The list of fellowships and internships a UCLA MHA student should actually apply to this year, tracked from deadline to offer.</strong></p>
+        <p>Created for Master of Healthcare Administration students in California throughout all phases of their academic journey.</p>
 
-        <p>Made for the UCLA MHA cohort. Not a global job board. If it's not something a UCLA MHA student can realistically get and do — it's not on the list.</p>
+        <p>Inspired by <a href="https://fellowsource.com" target="_blank" rel="noopener">FellowSource</a>, a PharmD fellowship site created by Mark Kamel. This site serves to enhance exposure to opportunities for MHA students as internships and fellowships open up to this new degree program as a navigation resource for a landscape traditionally built for MBA and MPH students.</p>
 
-        <h3>What counts as a listing</h3>
+        <h3>Dashboard Requirements</h3>
+        <p>aka eligibility rules; what counts as a listing:</p>
         <ul>
-          <li><strong>Topic fit:</strong> aligned with an MHA (hospital ops, provider/payer ops, health policy, consulting, healthcare finance/strategy) — or a <em>non-technical</em> role in healthcare tech (EHR, EMR, CDS, HIT, healthcare AI, digital health). No SWE, ML engineering, or hard-coding roles.</li>
-          <li><strong>Location fit:</strong> doable from UCLA / LA, or remote-from-LA, or UCLA-recruited.</li>
-          <li><strong>Conference travel:</strong> if a program requires conference travel, the employer must cover travel + lodging + fees.</li>
+          <li><strong>Program, not permanent role:</strong> a structured internship or fellowship with a defined length and end date. No regular job postings.</li>
+          <li><strong>Topic:</strong> any role an MHA student can realistically land, across industries.</li>
+          <li><strong>Location:</strong> onsite and hybrid must be in California. Remote may be anywhere.</li>
+          <li><strong>Conference travel</strong> (when required): the employer covers travel + lodging + fees.</li>
         </ul>
 
         <h3>How to use it</h3>
         <ul>
-          <li><strong>Browse</strong> is the list. Sort is by deadline. Three quick filters at the top; more in the drawer.</li>
-          <li><strong>My dashboard</strong> is your personal tracker. Tick each requirement as you finish it and the little vertical stroke on the left fills. When it closes into a filled circle at the top, you've submitted.</li>
-          <li>Everything is saved <em>in this browser only</em>. Export a JSON to move it.</li>
+          <li><strong>Browse</strong> is the list. Sort is by deadline. Three quick filters at the top; City and Pay in the drawer. Pick <strong>In-program</strong> to hide post-grad fellowships.</li>
+          <li><strong>My Dashboard</strong> is your personal tracker. Check each requirement as you finish it.</li>
+          <li><strong>Just added</strong> chips mark listings added in the last 14 days.</li>
+          <li>Tracking is saved <em>in this browser only</em>. Export a JSON to move it to another device.</li>
         </ul>
 
-        <h3>Freshness</h3>
-        <p>Every listing has a <em>last verified</em> date. Anything older than 45 days shows a small "verify" chip that opens the source page in a new tab. <strong>Always confirm the deadline on the official source before you apply</strong> — dates shift each cycle.</p>
+        <h3>Consulting pathways</h3>
+        <p>Most consulting firms recruit summer interns through two parallel programs — one for undergraduates, one for advanced-degree candidates (MBA, MD, JD, PhD). Both appear on Browse. Discuss with your campus career center which one fits your profile, or apply to both.</p>
 
-        <h3>The 3% remix</h3>
-        <p>Inspired by <a href="https://fellowsource.com" rel="noopener" target="_blank">FellowSource</a>. Three things this list does differently: UCLA-specific curation (each listing carries a "UCLA history" chip), a requirement-first framing (your next deadline is the first thing you see), and share cards built for the cohort GroupMe.</p>
+        <p><strong>Consulting application periods are cyclical</strong> — they occur at roughly the same time each year with similar requirements and pathways. If this is on your radar, monitor the firm's site through the application window.</p>
 
-        <p class="dim">v1 · Static site · <a href="https://github.com/" rel="noopener" target="_blank">Source on GitHub</a></p>
+        <p><strong>Consulting summer internships</strong> typically take place the summer before graduation and are applied for the year prior to that summer.</p>
+
+        <p><strong>Firms may recruit only from select partner schools.</strong> Speak with your career center to find out what consulting firms your campus has a recruitment relationship with.</p>
+
+        <table class="entry-table">
+          <thead>
+            <tr>
+              <th>Firm</th>
+              <th>Advanced-degree track (summer intern)</th>
+              <th>Undergraduate track (summer intern)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>McKinsey &amp; Company</td><td class="target">Summer Associate</td><td>Summer Business Analyst</td></tr>
+            <tr><td>BCG</td><td class="target">Summer Consultant</td><td>Summer Associate</td></tr>
+            <tr><td>Bain &amp; Company</td><td class="target">Summer Associate</td><td>Associate Consultant Intern</td></tr>
+            <tr><td>Deloitte</td><td class="target">LSHC Summer Associate / Summer Scholar</td><td>Business Analyst / BTA / Discovery Intern</td></tr>
+            <tr><td>PwC</td><td class="target">Health Industries Senior Associate Intern</td><td>Associate Intern</td></tr>
+            <tr><td>EY</td><td class="target">Health Sciences Senior Intern</td><td>Staff Intern</td></tr>
+            <tr><td>KPMG</td><td class="target">Healthcare Senior Associate Intern</td><td>Associate Intern</td></tr>
+            <tr><td>Accenture</td><td class="target">Health Consultant Intern</td><td>Health Analyst Intern</td></tr>
+          </tbody>
+        </table>
+        <p class="dim tiny">Role names shift. Verify on the firm's direct site.</p>
+
+        <h3>Verify before you apply</h3>
+        <p>Program deadlines move every cycle. Every listing on this site carries a <em>last verified</em> date; always double-check the official posting before you commit.</p>
+
+        <h3>Add to the list</h3>
+        <p>Found a program that should be here? <a href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+" target="_blank" rel="noopener">Submit it →</a>. Submissions are reviewed before they go live.</p>
+
+        <p class="dim">v2.3 · <a href="https://github.com/jadeelese/MHAinternshipwebsite" rel="noopener" target="_blank">Source on GitHub</a></p>
       </div>
     </section>
 
@@ -191,11 +216,14 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p class="dim tiny">Made for the UCLA MHA cohort. Verify every deadline on the source page before applying.</p>
+      <div class="foot-links">
+        <a href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+" target="_blank" rel="noopener">Add a listing</a>
+        <a href="https://github.com/jadeelese/MHAinternshipwebsite" target="_blank" rel="noopener">Source</a>
+      </div>
+      <p class="dim tiny" style="text-align:center;">Disclaimer: verify deadlines and requirements on the source page before applying.</p>
     </div>
   </footer>
 
-  <!-- Listing detail modal -->
   <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-scrim" data-close></div>
     <div class="modal-panel" tabindex="-1">
@@ -219,12 +247,17 @@
           <span class="org dim"></span>
         </div>
         <div class="row-meta">
+          <span class="chip just-added" hidden>Just added</span>
           <span class="chip cat"></span>
           <span class="chip loc"></span>
           <span class="chip mode"></span>
-          <span class="chip ucla" hidden></span>
-          <span class="chip stale" hidden>verify</span>
+          <span class="chip partnership" hidden></span>
+          <span class="chip pathway-chip" hidden></span>
+          <span class="chip closed-chip" hidden>Window closed</span>
+          <span class="chip link-pending" hidden>Link pending</span>
         </div>
+        <p class="partnership-nudge" hidden></p>
+        <p class="pathway-nudge" hidden></p>
       </div>
       <div class="row-deadline">
         <span class="days"></span>
