@@ -1,4 +1,4 @@
-/* MHAinternshipwebsite — one stylesheet
+/* MHAinternshipwebsite — v2
    Design brief: editorial, calm, deadline-first.
    The vertical stroke is the only accent color on the page — that's the signature.
 */
@@ -15,9 +15,9 @@
   --line: #ebe6dc;
   --line-2: #d9d3c5;
 
-  /* The single accent. UCLA True Blue, muted a touch for calm. */
-  --accent: #2774ae;
-  --accent-strong: #1d5c8a;
+  /* The single accent. Warm umber — California-neutral. */
+  --accent: #9a5a2d;
+  --accent-strong: #7a4620;
 
   /* Warning/verify */
   --warn: #b45a1a;
@@ -36,8 +36,8 @@
     --ink-3: #8f8a80;
     --line: #2a2925;
     --line-2: #3a3833;
-    --accent: #6ba9d8;
-    --accent-strong: #8fc0e6;
+    --accent: #d08a5a;
+    --accent-strong: #e3a173;
     --warn: #d68a4a;
   }
 }
@@ -49,8 +49,8 @@
   --ink-3: #8f8a80;
   --line: #2a2925;
   --line-2: #3a3833;
-  --accent: #6ba9d8;
-  --accent-strong: #8fc0e6;
+  --accent: #d08a5a;
+  --accent-strong: #e3a173;
   --warn: #d68a4a;
 }
 
@@ -98,13 +98,6 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   color: var(--accent);
 }
 .brand-name { font-size: 18px; font-weight: 600; letter-spacing: 0.2px; }
-.brand-tag {
-  font-size: 11px; font-family: var(--sans); text-transform: uppercase; letter-spacing: 1.5px;
-  color: var(--ink-3);
-  padding: 2px 6px;
-  border: 1px solid var(--line-2);
-  border-radius: 3px;
-}
 
 .nav { display: flex; gap: 4px; }
 .nav a {
@@ -187,11 +180,6 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
-.filter.check {
-  flex-direction: row; align-items: center; gap: 8px;
-  color: var(--ink-2); font-size: 14px;
-  padding-bottom: 8px;
-}
 .ghost {
   font: inherit; font-size: 14px;
   background: transparent;
@@ -239,26 +227,11 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
 .row:hover, .row:focus { background: var(--bg-elev); outline: none; }
 .row:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
 
-.stroke {
-  display: block;
-  width: 12px;
-}
+.stroke { display: block; width: 12px; }
 .stroke svg { display: block; width: 12px; height: 60px; overflow: visible; }
-.stroke-track {
-  stroke: var(--line-2);
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-.stroke-fill {
-  stroke: var(--accent);
-  stroke-width: 2;
-  stroke-linecap: round;
-  transition: y2 0.4s ease-out;
-}
-.stroke-cap {
-  fill: var(--accent);
-  transition: r 0.3s ease-out;
-}
+.stroke-track { stroke: var(--line-2); stroke-width: 2; stroke-linecap: round; }
+.stroke-fill { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; transition: y2 0.4s ease-out; }
+.stroke-cap { fill: var(--accent); transition: r 0.3s ease-out; }
 
 .row-body { min-width: 0; }
 .row-title {
@@ -284,10 +257,18 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   border-radius: 100px;
   white-space: nowrap;
 }
-.chip.ucla {
+.chip.partnership-specific {
   color: var(--accent-strong);
   border-color: var(--accent);
-  background: transparent;
+}
+.chip.partnership-unknown {
+  color: var(--ink-3);
+  border-color: var(--line-2);
+}
+.chip.closed {
+  color: var(--ink-3);
+  background: var(--line);
+  border-color: var(--line-2);
 }
 .chip.stale {
   color: var(--warn);
@@ -306,7 +287,8 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   color: var(--ink);
 }
 .row-deadline .days.urgent { color: var(--warn); font-weight: 600; }
-.row-deadline .days.overdue { color: var(--ink-3); font-style: italic; }
+.row-deadline .days.closed { color: var(--ink-3); font-style: italic; }
+.row-deadline .days.rolling { color: var(--accent-strong); font-style: italic; }
 .row-deadline .deadline-date { font-size: 12px; }
 
 /* Dashboard groups */
@@ -320,8 +302,6 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   font-weight: 500;
   font-size: 16px;
   color: var(--ink-2);
-  text-transform: none;
-  letter-spacing: normal;
 }
 #dash-groups .dash-group .list { border-top: none; }
 #dash-groups .dash-empty {
@@ -342,6 +322,78 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
 .prose ul { padding-left: 20px; }
 .prose li { margin-bottom: 4px; }
 .prose a { border-bottom: 1px solid var(--line-2); }
+
+/* Consulting entry table on About page */
+.entry-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 20px;
+  font-size: 13px;
+}
+.entry-table th, .entry-table td {
+  text-align: left;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.entry-table th {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-3);
+}
+.entry-table td.target { color: var(--accent-strong); font-weight: 500; }
+.entry-table td.avoid { color: var(--ink-3); text-decoration: line-through; }
+
+/* Add-a-listing call-to-action */
+.add-listing-cta {
+  margin: 48px 0 16px;
+  padding: 24px 20px;
+  border: 1px dashed var(--line-2);
+  border-radius: 8px;
+  text-align: center;
+}
+.add-listing-cta h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 17px;
+  margin: 0 0 6px;
+}
+.add-listing-cta p {
+  color: var(--ink-3);
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+.add-listing-cta .button {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: inherit; font-size: 14px;
+  background: var(--ink); color: var(--bg);
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.add-listing-cta .button:hover {
+  background: var(--accent-strong); border-color: var(--accent-strong); color: #fff;
+}
+
+/* Partnership nudge under chip row */
+.partnership-nudge {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #f5efe4;
+  border-left: 2px solid var(--accent);
+  font-size: 12px;
+  color: var(--ink-2);
+  font-style: italic;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .partnership-nudge { background: #221d16; }
+}
+:root[data-theme="dark"] .partnership-nudge { background: #221d16; }
 
 /* MODAL */
 .modal[hidden] { display: none !important; }
@@ -449,12 +501,19 @@ a:hover { color: var(--accent-strong); border-bottom-color: var(--accent); }
   margin-top: 60px;
   padding-block: 24px;
 }
+.site-footer .foot-links {
+  display: flex; gap: 16px; justify-content: center; margin-bottom: 8px;
+}
+.site-footer .foot-links a {
+  font-size: 13px;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--line-2);
+}
 
 /* RESPONSIVE */
 @media (max-width: 640px) {
   .site-header .wrap { padding-block: 12px; }
   .nav a { padding: 6px 8px; font-size: 13px; }
-  .brand-tag { display: none; }
   .headline { padding-block: 28px 20px; }
   .row {
     grid-template-columns: 18px 1fr;
