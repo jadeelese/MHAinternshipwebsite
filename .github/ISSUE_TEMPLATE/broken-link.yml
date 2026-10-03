@@ -1,0 +1,42 @@
+name: Report a broken link
+description: Flag a listing whose "Official posting" link is dead or wrong.
+title: "Broken link: "
+labels: ["broken-link"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for flagging. The weekly automated check catches most broken links, but if you spot one in between, this gets it fixed faster.
+
+  - type: input
+    id: listing_id
+    attributes:
+      label: Listing id (slug)
+      description: "If you know it (e.g. 'ucla-health-admin-fellowship'). If not, leave blank and name the program below."
+      placeholder: "e.g. deloitte-lshc-summer-scholar"
+
+  - type: input
+    id: program_name
+    attributes:
+      label: Program name
+      placeholder: "e.g. Deloitte LSHC Summer Scholar"
+    validations:
+      required: true
+
+  - type: input
+    id: broken_url
+    attributes:
+      label: The URL that's broken
+      placeholder: "https://..."
+
+  - type: input
+    id: correct_url
+    attributes:
+      label: Correct URL (if you have it)
+      placeholder: "https://..."
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      placeholder: "Optional."
