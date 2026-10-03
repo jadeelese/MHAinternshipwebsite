@@ -1,0 +1,27 @@
+name: Validate listings
+on:
+  pull_request:
+    paths:
+      - "listings.json"
+      - "scripts/validate-listings.mjs"
+      - ".github/workflows/validate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "listings.json"
+      - "scripts/validate-listings.mjs"
+      - ".github/workflows/validate.yml"
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Schema + rules
+        run: node scripts/validate-listings.mjs listings.json
+      - name: Link check
+        env:
+          CHECK_LINKS: "1"
+        run: node scripts/validate-listings.mjs listings.json
