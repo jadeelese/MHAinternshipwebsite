@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MHA Internships & Fellowships — UCLA</title>
-  <meta name="description" content="The list of fellowships and internships a UCLA MHA student should actually apply to this year — tracked from deadline to offer." />
+  <title>MHA Internships &amp; Fellowships</title>
+  <meta name="description" content="The list of fellowships and internships, by deadline. For California MHA students." />
 
   <!-- Open Graph (share card) -->
-  <meta property="og:title" content="MHA Internships & Fellowships — UCLA" />
-  <meta property="og:description" content="The list of fellowships and internships a UCLA MHA student should apply to this year." />
+  <meta property="og:title" content="MHA Internships &amp; Fellowships" />
+  <meta property="og:description" content="The list of fellowships and internships, by deadline. For California MHA students." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="og.svg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -25,7 +25,6 @@
           <circle cx="10" cy="5" r="3.5" fill="currentColor" />
         </svg>
         <span class="brand-name">MHA Internships</span>
-        <span class="brand-tag">UCLA</span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#browse" data-nav="browse">Browse</a>
@@ -51,46 +50,37 @@
           <span>Category</span>
           <select id="f-category">
             <option value="all">All</option>
-            <option value="mha_admin">MHA admin</option>
-            <option value="health_tech_nontech">Health tech (non-tech)</option>
           </select>
         </label>
         <label class="filter">
           <span>Deadline</span>
           <select id="f-window">
             <option value="all">All</option>
+            <option value="open">Open</option>
+            <option value="rolling">Rolling</option>
             <option value="30">Next 30 days</option>
             <option value="60">Next 60 days</option>
             <option value="90">Next 90 days</option>
+            <option value="closed">Closed this cycle</option>
           </select>
         </label>
         <label class="filter">
-          <span>My status</span>
-          <select id="f-status">
+          <span>Format</span>
+          <select id="f-format">
             <option value="all">All</option>
-            <option value="considering">Considering</option>
-            <option value="applied">Applied</option>
-            <option value="interviewing">Interviewing</option>
-            <option value="offer">Offer</option>
-            <option value="passed">Passed</option>
-            <option value="untracked">Untracked</option>
+            <option value="onsite">Onsite</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="remote">Remote</option>
           </select>
-        </label>
-        <label class="filter check">
-          <input type="checkbox" id="f-postgrad" />
-          <span>Show post-grad fellowships too</span>
         </label>
         <button id="more-filters-btn" class="ghost" type="button" aria-expanded="false">More filters</button>
       </div>
 
       <div id="more-filters" class="more-filters" hidden>
         <label class="filter">
-          <span>Work mode</span>
-          <select id="f-mode">
+          <span>City</span>
+          <select id="f-city">
             <option value="all">All</option>
-            <option value="onsite">Onsite</option>
-            <option value="hybrid">Hybrid</option>
-            <option value="remote">Remote</option>
           </select>
         </label>
         <label class="filter">
@@ -103,24 +93,6 @@
             <option value="unknown">Unknown</option>
           </select>
         </label>
-        <label class="filter">
-          <span>MHA year</span>
-          <select id="f-year">
-            <option value="all">All</option>
-            <option value="mha_year_1">Year 1</option>
-            <option value="mha_year_2">Year 2</option>
-            <option value="either">Either</option>
-            <option value="post_graduate">Post-graduate</option>
-          </select>
-        </label>
-        <label class="filter">
-          <span>Conference travel</span>
-          <select id="f-travel">
-            <option value="all">Any</option>
-            <option value="yes-or-na">Covered / N/A</option>
-            <option value="hide-no">Hide "not covered"</option>
-          </select>
-        </label>
       </div>
 
       <h2 id="browse-heading" class="section-heading">
@@ -131,11 +103,37 @@
       <ol id="list" class="list" aria-live="polite"></ol>
 
       <p id="empty" class="empty" hidden>No listings match those filters. Try widening them.</p>
+
+      <!-- Add a listing CTA -->
+      <div class="add-listing-cta">
+        <h3>Know a program that belongs on this list?</h3>
+        <p>Submit it. Jade reviews each one before it goes live.</p>
+        <a class="button"
+           href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+"
+           target="_blank" rel="noopener">
+          Add a listing ↗
+        </a>
+      </div>
     </section>
 
     <!-- DASHBOARD VIEW -->
     <section id="view-dashboard" class="view" hidden aria-labelledby="dashboard-heading">
       <h2 id="dashboard-heading" class="section-heading">My dashboard</h2>
+
+      <div class="filters" role="region" aria-label="Dashboard filters">
+        <label class="filter">
+          <span>My status</span>
+          <select id="f-status">
+            <option value="all">All</option>
+            <option value="considering">Considering</option>
+            <option value="in_progress">Application in progress</option>
+            <option value="applied">Applied</option>
+            <option value="interviewing">Interviewing</option>
+            <option value="archive">Archive</option>
+          </select>
+        </label>
+      </div>
+
       <div id="dash-groups"></div>
 
       <div class="danger-zone">
@@ -159,31 +157,70 @@
       <h2 id="about-heading" class="section-heading">About this list</h2>
 
       <div class="prose">
-        <p><strong>The list of fellowships and internships a UCLA MHA student should actually apply to this year, tracked from deadline to offer.</strong></p>
+        <p><strong>The list of fellowships and internships, by deadline. For California MHA students.</strong></p>
 
-        <p>Made for the UCLA MHA cohort. Not a global job board. If it's not something a UCLA MHA student can realistically get and do — it's not on the list.</p>
+        <p>Made for every California MHA student — new program, part-time or full-time, current or recently graduated. If it's not something a CA MHA student can realistically land, it's not on the list.</p>
+
+        <h3>Who this is for</h3>
+        <p>You're in an MHA program that's new enough that the internship-and-fellowship landscape is largely uncharted. You don't yet know what you don't know — and by the time you realize you should be applying, you're probably already behind on deadlines. This list exists to catch you before that happens.</p>
 
         <h3>What counts as a listing</h3>
         <ul>
-          <li><strong>Topic fit:</strong> aligned with an MHA (hospital ops, provider/payer ops, health policy, consulting, healthcare finance/strategy) — or a <em>non-technical</em> role in healthcare tech (EHR, EMR, CDS, HIT, healthcare AI, digital health). No SWE, ML engineering, or hard-coding roles.</li>
-          <li><strong>Location fit:</strong> doable from UCLA / LA, or remote-from-LA, or UCLA-recruited.</li>
-          <li><strong>Conference travel:</strong> if a program requires conference travel, the employer must cover travel + lodging + fees.</li>
+          <li><strong>Topic:</strong> any role an MHA student can realistically land, across industries — consulting, health systems, payers, pharma/biotech, digital health, government, non-profits, administrative fellowships.</li>
+          <li><strong>Location:</strong> anywhere in California, or remote-friendly from California.</li>
+          <li><strong>Conference travel</strong> (when required): the employer covers travel + lodging + fees.</li>
         </ul>
 
         <h3>How to use it</h3>
         <ul>
-          <li><strong>Browse</strong> is the list. Sort is by deadline. Three quick filters at the top; more in the drawer.</li>
+          <li><strong>Browse</strong> is the list. Sort is by deadline. Three quick filters at the top; City and Pay in the drawer.</li>
           <li><strong>My dashboard</strong> is your personal tracker. Tick each requirement as you finish it and the little vertical stroke on the left fills. When it closes into a filled circle at the top, you've submitted.</li>
-          <li>Everything is saved <em>in this browser only</em>. Export a JSON to move it.</li>
+          <li>Tracking is saved <em>in this browser only</em>. Export a JSON to move it to another device.</li>
         </ul>
 
-        <h3>Freshness</h3>
-        <p>Every listing has a <em>last verified</em> date. Anything older than 45 days shows a small "verify" chip that opens the source page in a new tab. <strong>Always confirm the deadline on the official source before you apply</strong> — dates shift each cycle.</p>
+        <h3>What I wish I'd known</h3>
+        <ul>
+          <li><strong>Go to the in-person consulting fairs at your campus.</strong> Build relationships with recruiters and with current consultants who are alumni of your program. Attend their case-study events.</li>
+          <li><strong>At MBB and Big 4, MHA grads enter as Associate / Senior Consultant</strong> — not as Business Analyst or Analyst (those are undergrad tracks). The reference table below shows the entry role at each firm.</li>
+          <li><strong>Post-grad administrative fellowships</strong> at health systems are 12–24 month paid programs that start July after graduation. Most deadlines land in <strong>fall of your final year</strong>.</li>
+          <li><strong>If a program isn't posted for this cycle yet, note last year's deadline</strong> as a starting reference and check the official page every two weeks.</li>
+        </ul>
 
-        <h3>The 3% remix</h3>
-        <p>Inspired by <a href="https://fellowsource.com" rel="noopener" target="_blank">FellowSource</a>. Three things this list does differently: UCLA-specific curation (each listing carries a "UCLA history" chip), a requirement-first framing (your next deadline is the first thing you see), and share cards built for the cohort GroupMe.</p>
+        <h3>Consulting MHA entry roles</h3>
+        <p>When you click "Official posting" on a consulting firm, the landing page often features the undergrad track. The role you actually want is one level up. Use this table to make sure you're applying to the right one.</p>
 
-        <p class="dim">v1 · Static site · <a href="https://github.com/" rel="noopener" target="_blank">Source on GitHub</a></p>
+        <table class="entry-table">
+          <thead>
+            <tr>
+              <th>Firm</th>
+              <th>Apply as (MHA)</th>
+              <th>Not this (undergrad)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>McKinsey &amp; Company</td><td class="target">Associate</td><td class="avoid">Business Analyst</td></tr>
+            <tr><td>BCG</td><td class="target">Consultant</td><td class="avoid">Associate</td></tr>
+            <tr><td>Bain &amp; Company</td><td class="target">Consultant</td><td class="avoid">Associate Consultant</td></tr>
+            <tr><td>Deloitte</td><td class="target">Senior Consultant</td><td class="avoid">Business Technology Analyst</td></tr>
+            <tr><td>PwC</td><td class="target">Senior Associate</td><td class="avoid">Associate</td></tr>
+            <tr><td>EY</td><td class="target">Senior</td><td class="avoid">Staff</td></tr>
+            <tr><td>KPMG</td><td class="target">Senior Associate</td><td class="avoid">Associate</td></tr>
+            <tr><td>Accenture</td><td class="target">Consultant</td><td class="avoid">Analyst</td></tr>
+            <tr><td>Guidehouse</td><td class="target">Senior Consultant</td><td class="avoid">Consultant</td></tr>
+            <tr><td>Chartis Group</td><td class="target">Consultant</td><td class="avoid">Analyst</td></tr>
+            <tr><td>Oliver Wyman Health</td><td class="target">Senior Associate</td><td class="avoid">Associate</td></tr>
+            <tr><td>ZS Associates</td><td class="target">Business Consulting Associate</td><td class="avoid">BTA</td></tr>
+          </tbody>
+        </table>
+        <p class="dim tiny">Role names shift. Verify on the firm's advanced-degree hiring page before applying.</p>
+
+        <h3>Verify before you apply</h3>
+        <p>Program deadlines move every cycle. Every listing on this site carries a <em>last verified</em> date; always double-check the official posting before you commit. If a program says their application window requires you to be at a specific school, <strong>contact your MHA program's career center</strong> to confirm — not LinkedIn.</p>
+
+        <h3>Add to the list</h3>
+        <p>Found a program that should be here? <a href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+" target="_blank" rel="noopener">Submit it →</a>. Jade reviews each submission before it goes live.</p>
+
+        <p class="dim">v2 · <a href="https://github.com/jadeelese/MHAinternshipwebsite" rel="noopener" target="_blank">Source on GitHub</a></p>
       </div>
     </section>
 
@@ -191,7 +228,11 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p class="dim tiny">Made for the UCLA MHA cohort. Verify every deadline on the source page before applying.</p>
+      <div class="foot-links">
+        <a href="https://github.com/jadeelese/MHAinternshipwebsite/issues/new?template=add-listing.yml&title=New+listing%3A+" target="_blank" rel="noopener">Add a listing</a>
+        <a href="https://github.com/jadeelese/MHAinternshipwebsite" target="_blank" rel="noopener">Source</a>
+      </div>
+      <p class="dim tiny" style="text-align:center;">Verify every deadline on the source page before applying.</p>
     </div>
   </footer>
 
@@ -222,9 +263,10 @@
           <span class="chip cat"></span>
           <span class="chip loc"></span>
           <span class="chip mode"></span>
-          <span class="chip ucla" hidden></span>
-          <span class="chip stale" hidden>verify</span>
+          <span class="chip partnership" hidden></span>
+          <span class="chip closed-chip" hidden>Window closed</span>
         </div>
+        <p class="partnership-nudge" hidden></p>
       </div>
       <div class="row-deadline">
         <span class="days"></span>

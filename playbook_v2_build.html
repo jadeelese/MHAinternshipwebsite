@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MHA Internships — Playbook: v2 build, v3 roadmap</title>
+<style>
+  @page { size: Letter; margin: 0.75in; }
+  :root {
+    --ink: #171613;
+    --ink-2: #3f3d38;
+    --ink-3: #6b6862;
+    --line: #d9d3c5;
+    --accent: #9a5a2d;
+    --accent-strong: #7a4620;
+    --v3: #5a6a85;
+    --v3-bg: #eef1f6;
+    --serif: "Iowan Old Style", "Charter", "Georgia", "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; color: var(--ink); }
+  body {
+    font-family: var(--serif);
+    font-size: 11.5pt;
+    line-height: 1.5;
+    max-width: 7in;
+    margin: 0 auto;
+    padding: 0.4in 0.5in;
+  }
+  @media screen { body { padding: 48px 56px; max-width: 820px; background: #faf8f4; } }
+  header.doc-head { border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 24px; }
+  header.doc-head .eyebrow { font-family: var(--sans); font-size: 10pt; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  header.doc-head h1 { font-size: 24pt; font-weight: 500; margin: 0; letter-spacing: -0.01em; line-height: 1.15; }
+  header.doc-head .sub { font-family: var(--sans); font-size: 10.5pt; color: var(--ink-3); margin-top: 10px; }
+
+  h2 { font-family: var(--serif); font-size: 17pt; font-weight: 500; letter-spacing: -0.005em; margin: 28px 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+  h2 .n { display: inline-block; width: 1.3em; color: var(--ink-3); font-family: var(--sans); font-size: 10pt; vertical-align: 2pt; }
+  h3 { font-family: var(--serif); font-size: 13pt; font-weight: 500; margin: 18px 0 6px; color: var(--ink); }
+  h4 { font-family: var(--sans); font-size: 10pt; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink-3); margin: 14px 0 4px; }
+
+  p { margin: 0 0 10px; }
+  ul, ol { padding-left: 20px; margin: 0 0 12px; }
+  li { margin-bottom: 4px; }
+  strong { color: var(--ink); }
+  em { font-style: italic; color: var(--accent-strong); }
+  a { color: var(--accent-strong); text-decoration: none; border-bottom: 1px solid var(--line); }
+
+  .lede {
+    font-family: var(--serif); font-size: 13.5pt; line-height: 1.45; color: var(--ink);
+    margin: 14px 0 20px; padding: 14px 18px;
+    border-left: 3px solid var(--accent); background: #f5efe4;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: 10.5pt; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--sans); font-size: 9.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-3); border-bottom: 1.5px solid var(--ink-2); }
+  td code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10pt; background: #f0e9d9; padding: 1px 4px; border-radius: 3px; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: 2pt;
+  }
+  .tag.v2 { background: var(--accent); color: #fff; }
+  .tag.v3 { background: var(--v3); color: #fff; }
+
+  .v3-block {
+    border-left: 3px solid var(--v3);
+    background: var(--v3-bg);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .v3-block h3, .v3-block h4 { margin-top: 0; }
+  .v3-block h3 .tag { margin-right: 8px; }
+
+  .callout {
+    margin: 16px 0; padding: 14px 18px;
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    background: #faf5e8; font-size: 11pt;
+  }
+  .callout h4 { margin-top: 0; color: var(--accent-strong); }
+
+  pre.code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5pt; line-height: 1.5;
+    background: #f0e9d9; border: 1px solid var(--line); border-left: 3px solid var(--ink-2);
+    padding: 12px 14px; white-space: pre-wrap; word-wrap: break-word; page-break-inside: avoid;
+    color: var(--ink); border-radius: 2px;
+  }
+
+  footer.doc-foot { margin-top: 40px; padding-top: 10px; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 9pt; color: var(--ink-3); text-align: center; }
+  .page-break { break-before: page; }
+  h2, h3 { break-after: avoid; }
+  table, .callout, .v3-block, pre.code { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <p class="eyebrow">MHA Internships Dashboard · Build Playbook</p>
+  <h1>v2, building now. v3, scoped and waiting.</h1>
+  <p class="sub">
+    For <strong>Jade</strong> · October 3, 2026 · Site: <a href="https://mhainternshipwebsite.vercel.app">mhainternshipwebsite.vercel.app</a>
+  </p>
+</header>
+
+<p class="lede">
+  You asked for everything in writing before you sleep. Here it is: the user story, the tier system,
+  the search methodology, the add-a-listing flow in <span class="tag v2">v2</span> and
+  <span class="tag v3">v3</span>, the ship gates, and the actual v2 build prompt. v3 ideas live inside
+  blue-bordered blocks so you can see what's deferred without hunting.
+</p>
+
+<h2><span class="n">1</span>User story</h2>
+<p>Yours, verbatim:</p>
+<div class="callout">
+  <p>
+    "An MHA student in a program that's new enough that the internship and fellowship landscape is
+    largely uncharted. They don't know what they don't know — and by the time they realize they
+    should be applying, they're probably already behind on deadlines."
+  </p>
+</div>
+<p>The site's single job is to catch that student <em>before</em> they realize they're late. If the first scroll doesn't do that, nothing else matters.</p>
+
+<h2><span class="n">2</span>The tier system — plain language</h2>
+
+<p><strong>What a tier is.</strong> A confidence label on each listing. It tells us how sure we are this is a real opportunity an MHA grad can realistically land, versus a role we think <em>might</em> be one.</p>
+
+<p><strong>What it does.</strong> Two things at once:</p>
+<ul>
+  <li>A <strong>label</strong> on each listing — internal only, never shown to the user.</li>
+  <li>A <strong>gate</strong> on the search output: anything softer than tier 2 doesn't make it into <code>listings.json</code>.</li>
+</ul>
+
+<p><strong>How it links to search.</strong> The search methodology produces a candidate pile (maybe 150–200 possibles). The tier filter cuts anything that can't be verified. It's the quality floor that lets me ship a long list without stuffing it with maybes.</p>
+
+<pre class="code">Search sources  →  Candidate pile  →  Tier filter  →  listings.json  →  Site</pre>
+
+<h3>Tier definitions (operational, not aspirational)</h3>
+<table>
+  <tr>
+    <th>Tier</th>
+    <th>What qualifies</th>
+    <th>Confidence</th>
+  </tr>
+  <tr>
+    <td><strong>Tier 1</strong></td>
+    <td>
+      Employer and role named in a California MHA program's outcomes report (last 3 years),
+      <strong>or</strong> explicitly named on the employer's own advanced-degree / MBA / MHA
+      recruiting page.
+    </td>
+    <td>High</td>
+  </tr>
+  <tr>
+    <td><strong>Tier 2</strong></td>
+    <td>
+      Employer has a documented advanced-degree pathway <strong>AND</strong> the role is in a
+      healthcare-adjacent practice/division <strong>AND</strong> that practice has publicly hired
+      graduate-degree holders in the last 2 cycles.
+    </td>
+    <td>Medium</td>
+  </tr>
+  <tr>
+    <td class="dim" style="color:var(--ink-3)">Tier 3</td>
+    <td colspan="2" class="dim" style="color:var(--ink-3)"><em>Cut. Anything softer than tier 2 is not listed.</em></td>
+  </tr>
+</table>
+
+<p>Every tier-1 and tier-2 condition is pointable: a specific URL, a specific PDF, a named role on a page. Nothing is "likely" or "probably." That's the discipline.</p>
+
+<p><strong>LinkedIn is explicitly not a verification source.</strong> Alumni on LinkedIn tell you where someone's degree once helped them get hired — not whether the firm is still recruiting from that program this cycle. We removed it per your call.</p>
+
+<h2><span class="n">3</span>How search is done — the methodology</h2>
+
+<p>Sources, in strict priority order. Higher-tier sources get checked first; lower-tier sources only fill gaps.</p>
+
+<ol>
+  <li><strong>California MHA program outcomes reports.</strong> Every accredited MHA program publishes an annual "where did graduates land" report — employer, role, location. Ground truth. Harvested where public.</li>
+  <li><strong>ACHE Administrative Fellowship Directory.</strong> ~100 post-graduate fellowships, filterable by state. All CA entries plus remote-friendly / nationally-recruiting entries.</li>
+  <li><strong>Employer career pages directly.</strong> Grad / advanced-degree sections of each firm's own site. The authoritative source for currently-open roles.</li>
+  <li><strong>NAHSE, NALHE, NCHL, Institute for Diversity in Health Management.</strong> Fellowship aggregators that cover programs ACHE often misses, especially diversity-focused tracks.</li>
+  <li><strong>BioSpace, HIMSS internship postings.</strong> Industry-specific aggregators for pharma/biotech and health IT.</li>
+</ol>
+
+<h3>Bucket minimums for v2</h3>
+<p>So the list doesn't lean on one industry:</p>
+<ul>
+  <li>≥7 CA health system fellowships / internships</li>
+  <li>≥5 CA payer / health plan internships</li>
+  <li>≥7 consulting (MBB + Big 4 + healthcare boutiques)</li>
+  <li>≥5 pharma / biotech</li>
+  <li>≥5 digital health / health tech (non-engineering only)</li>
+  <li>≥3 government / public sector</li>
+  <li>≥3 non-profit / foundation</li>
+  <li>≥3 post-grad administrative fellowships at non-CA-health-system orgs (VA, academic medical centers, national systems)</li>
+</ul>
+<p>Total floor: <strong>≥50 listings</strong>, all tier-1 or tier-2.</p>
+
+<h2 class="page-break"><span class="n">4</span>v2 build — what ships now</h2>
+
+<h3>Code and copy changes</h3>
+<table>
+  <tr><th>Area</th><th>Change</th></tr>
+  <tr><td>Header</td><td>Remove UCLA tag chip entirely</td></tr>
+  <tr><td>Accent color</td><td>UCLA Blue (#2774ae) → warm umber (#9a5a2d). Single-accent discipline keeps.</td></tr>
+  <tr><td>Share card (og.svg)</td><td>New copy: <em>"The list of fellowships and internships, by deadline. For California MHA students."</em> No UCLA callout.</td></tr>
+  <tr><td>Favicon</td><td>Same stroke, updated to new accent color</td></tr>
+  <tr><td>Button label</td><td>"Open source ↗" → <strong>"Official posting ↗"</strong></td></tr>
+  <tr><td>Filter label</td><td>"Work mode" → <strong>"Format"</strong></td></tr>
+  <tr><td>Status flow</td><td>Untracked / Considering / Application in progress / Applied / Interviewing / <strong>Archive</strong></td></tr>
+  <tr><td>Browse filters</td><td>Three only at top: Category / Deadline / Format. City + Pay in "More filters" drawer. "My status" removed from Browse (dashboard only).</td></tr>
+  <tr><td>Post-grad</td><td>Folded into Category dropdown as its own option; checkbox removed.</td></tr>
+  <tr><td>MHA year filter</td><td>Removed. Timing guidance goes inline on each listing.</td></tr>
+  <tr><td>Deadline options</td><td>All / Open / Rolling / Next 30 days / Next 60 days / Next 90 days / Closed this cycle</td></tr>
+  <tr><td>Deadline logic</td><td>Open = any currently accepting (undated / rolling / any future deadline). 30/60/90 are narrower slices.</td></tr>
+  <tr><td>Partnership chip</td><td>Two options only: <strong>PARTNERSHIP SPECIFIC</strong> or <strong>PARTNERSHIP UNKNOWN</strong>. Non-partnership listings show no chip.</td></tr>
+  <tr><td>Partnership nudge</td><td>Under the chip row on PARTNERSHIP SPECIFIC listings: <em>"Verify your school is on their recruiting list — contact your MHA program's career center."</em></td></tr>
+  <tr><td>Closed listings</td><td>Stay visible with <em>"Application window closed · next projected [month, year]"</em></td></tr>
+  <tr><td>Categories, cities</td><td>Options generated from the actual listings data. No predetermined lists.</td></tr>
+</table>
+
+<h3>About page updates</h3>
+<ul>
+  <li>Opening sentence rewritten for all CA MHA students — UCLA references removed.</li>
+  <li><strong>"What I wish I'd known"</strong> section with the four approved tips:
+    <ul>
+      <li>Attend in-person consulting fairs at your campus; build relationships with recruiters and current consultants who are alumni of your program. Go to their case-study events.</li>
+      <li>At MBB and Big 4, MHA grads typically enter at the Associate / Senior Consultant level — not the undergrad Analyst track. See the entry-role table below.</li>
+      <li>Post-grad administrative fellowships at health systems are 12–24 month paid programs that start July after graduation. Deadlines land in fall of your final year.</li>
+      <li>If a program isn't posted for this cycle yet, note last year's deadline as a starting reference.</li>
+    </ul>
+  </li>
+  <li><strong>Consulting MHA entry-role reference table</strong> (McKinsey, BCG, Bain, Big 4, boutiques) with the "pre-grad role you shouldn't apply to" column.</li>
+  <li>"Add a listing" button at the bottom of the home page and at the bottom of About.</li>
+</ul>
+
+<h2><span class="n">5</span>Add-a-listing flow</h2>
+
+<h3><span class="tag v2">v2</span> Human review via GitHub Issue</h3>
+<p>Shipping tonight. No new infrastructure. Uses what we already have.</p>
+
+<ol>
+  <li>Student clicks "Add a listing" at the bottom of the home page.</li>
+  <li>Button opens a <strong>pre-filled GitHub Issue</strong> on the <code>MHAinternshipwebsite</code> repo, using an issue template with three fields: Role title, Employer, Source URL (optional: brief note).</li>
+  <li>Student submits the issue. GitHub automatically emails you a notification via your account settings.</li>
+  <li>You open the issue in GitHub, decide:
+    <ul>
+      <li><strong>Approve:</strong> add the listing to <code>listings.json</code> via the GitHub web UI (one commit, 60 seconds).</li>
+      <li><strong>Decline:</strong> close the issue with a short comment.</li>
+    </ul>
+  </li>
+  <li>On approve → Vercel auto-deploys, listing is live.</li>
+</ol>
+
+<p>You're always in the loop. Nothing goes live without your tap.</p>
+
+<div class="v3-block">
+  <h3><span class="tag v3">v3</span> Claude-powered automatic extraction, you still approve</h3>
+  <p>Deferred. Needs two new environment variables (ANTHROPIC_API_KEY, GITHUB_TOKEN) and one Vercel serverless function. Build it when you want the submission form to feel instant.</p>
+
+  <h4>The flow</h4>
+  <ol>
+    <li>Student clicks "Add a listing" → three-field modal (Title, Employer, Source URL).</li>
+    <li>POST to <code>/api/submit</code> (Vercel serverless function).</li>
+    <li>Function fetches the URL, confirms HTTP 200 and that the employer name appears in the page content.</li>
+    <li>Function calls Claude once: <em>"Does this URL describe an internship or fellowship an MHA grad could realistically apply to? Return yes/no + 1-sentence reason + extracted fields (location, deadline, format, category)."</em></li>
+    <li>If YES → function uses the GitHub API to open a <strong>pull request</strong> on <code>listings.json</code> with the extracted listing on a branch called <code>submission/[hash]</code>. PR body contains the student's note + Claude's reasoning.</li>
+    <li>You get a GitHub notification. Review the PR. Click Merge (or Close) in the web UI.</li>
+    <li>On merge → Vercel auto-deploys.</li>
+  </ol>
+
+  <h4>Difference from v2</h4>
+  <ul>
+    <li>Student sees "Added to the review queue — Jade will get to it soon" instead of being redirected to GitHub.</li>
+    <li>The listing is pre-structured by Claude, so your review is a one-click Merge for most of them.</li>
+    <li>Rate limit: one submission per IP per hour via Vercel KV.</li>
+  </ul>
+
+  <h4>Costs</h4>
+  <ul>
+    <li>Vercel serverless: free tier handles thousands of invocations.</li>
+    <li>Claude API: ~$0.003 per submission (one short call).</li>
+    <li>Vercel KV: free tier is sufficient.</li>
+    <li><strong>Realistic monthly cost: under $1</strong> unless the site goes viral.</li>
+  </ul>
+</div>
+
+<div class="v3-block">
+  <h3><span class="tag v3">v3+</span> Fully automatic (opt-in later)</h3>
+  <p>Only consider this if submission volume ever gets large enough that queue review becomes a chore.</p>
+  <ul>
+    <li>Claude extracts + validates + commits directly to <code>main</code> (no PR). You get a weekly digest email of what was auto-added, and you can revert any entry with one click.</li>
+    <li>Added only when there's clear demand. For now, you stay in the loop.</li>
+  </ul>
+</div>
+
+<h2><span class="n">6</span>Ship gate — what has to pass before merge</h2>
+
+<h3><span class="tag v2">v2</span> You review the preview URL, then merge</h3>
+<p>Same gate as v1. When I open the v2 PR, Vercel builds a preview URL automatically. You open it, scroll, decide if it reads right. If yes, you click Merge in the PR. Production deploys from <code>main</code>.</p>
+<p>No external reviewer. You're the gate.</p>
+
+<div class="v3-block">
+  <h3><span class="tag v3">v3</span> Automated gate — merge without you</h3>
+  <p>When you want to stop clicking Merge every iteration, enable GitHub Actions on the repo. The actions run on every PR:</p>
+  <ol>
+    <li><strong>Link check:</strong> every <code>source_url</code> in <code>listings.json</code> returns HTTP 200.</li>
+    <li><strong>JSON schema validation:</strong> <code>listings.json</code> parses and every entry has required fields.</li>
+    <li><strong>Build success:</strong> Vercel preview deploys without a console error on the home page.</li>
+    <li><strong>No HTML/CSS parse regressions.</strong></li>
+  </ol>
+  <p>If all four pass → auto-merge → production deploys. If any fail → PR stays open with a labeled error.</p>
+  <p>Enables you to go to sleep and wake up to new listings.</p>
+</div>
+
+<h2 class="page-break"><span class="n">7</span>The v2 build prompt — what I'm executing now</h2>
+
+<pre class="code">Build v2 of MHAinternshipwebsite.
+
+Context. v1 is live at mhainternshipwebsite.vercel.app, PR #1 merged into main.
+Static HTML/CSS/JS. Vercel wired to the repo and auto-deploys on push to main.
+
+User story (ship/no-ship test):
+"An MHA student in a program that's new enough that the internship and
+fellowship landscape is largely uncharted. They don't know what they don't
+know — and by the time they realize they should be applying, they're
+probably already behind on deadlines."
+
+Non-goals.
+- No auth, no backend, no serverless function in v2.
+- No per-listing MHA-entry-role field.
+- No LinkedIn-alumni verification language anywhere.
+- No per-chip school list.
+
+Code changes (exhaustive).
+1. Remove the UCLA tag chip from the header.
+2. Replace accent #2774ae with #9a5a2d (warm umber) in CSS, favicon, OG card.
+3. Rename "Work mode" → "Format".
+4. Rename posting button → "Official posting ↗".
+5. Rename statuses: Untracked / Considering / Application in progress /
+   Applied / Interviewing / Archive.
+6. Move "My status" filter: Dashboard only, remove from Browse.
+7. Fold "Show post-grad fellowships" into Category dropdown as its own option.
+8. Remove MHA year filter.
+9. Deadline options (no parentheses in UI): All / Open / Rolling /
+   Next 30 days / Next 60 days / Next 90 days / Closed this cycle.
+   Open = any currently accepting applications (undated, rolling, or any
+   future deadline). 30/60/90 narrow Open to upcoming deadlines.
+10. Partnership chip: two options only — PARTNERSHIP SPECIFIC or
+    PARTNERSHIP UNKNOWN. Non-partnership listings show no chip. Below the
+    chip row on PARTNERSHIP SPECIFIC: "Verify your school is on their
+    recruiting list — contact your MHA program's career center."
+11. City options are generated from actual locations in listings. No
+    predetermined option list. Same rule for Category.
+12. Closed listings stay visible with "Application window closed · next
+    projected [month, year]".
+13. About page:
+    - Opening rewritten for all CA MHA students; UCLA removed.
+    - "What I wish I'd known" with the four tips confirmed.
+    - Consulting MHA entry-role reference table.
+    - "Add a listing" button at the bottom of home page and About.
+14. Regenerate og.svg with new copy.
+
+Data sweep (bucket minimums):
+  ≥7 CA health system fellowships / internships
+  ≥5 CA payer / health plan internships
+  ≥7 consulting (MBB + Big 4 + healthcare boutiques)
+  ≥5 pharma / biotech
+  ≥5 digital health / health tech (non-engineering only)
+  ≥3 government / public sector
+  ≥3 non-profit / foundation
+  ≥3 post-grad administrative fellowships at non-CA-health-system orgs
+Total: ≥50 listings. Every listing tier_1 or tier_2 only. No tier_3.
+
+Each listing must carry: title, employer, source_url (reachable),
+locations, format, rolling flag, deadline (null if undated),
+next_projected_month (if closed), partnership (specific / unknown / none),
+tier (1 or 2), last_verified (today).
+
+Ship gate: open PR to main. Jade reviews the preview URL, clicks Merge.
+No self-merge.</pre>
+
+<h2><span class="n">8</span>What's deferred — the v3 shopping list</h2>
+
+<div class="v3-block">
+  <ul>
+    <li><strong>Claude-powered add-a-listing endpoint</strong> (see section 5) — needs ANTHROPIC_API_KEY + GITHUB_TOKEN as Vercel env vars.</li>
+    <li><strong>Automated ship gate</strong> (see section 6) — GitHub Actions for link check + schema validation + build check.</li>
+    <li><strong>Fully-automatic add-a-listing</strong> with weekly digest — only when submission volume justifies it.</li>
+    <li><strong>Résumé-match client-side</strong> — paste a résumé, site ranks listings by fit. Runs in the browser, never leaves the device.</li>
+    <li><strong>Anonymous flywheel</strong> — "N classmates applied here" counts, requires light auth.</li>
+    <li><strong>Scheduled re-sweep</strong> — a bot that re-runs the search methodology quarterly and opens a PR with net changes.</li>
+    <li><strong>Internal tier label visible on listings</strong> if a user requests it (power-user filter).</li>
+  </ul>
+</div>
+
+<h2><span class="n">9</span>Tomorrow — things we haven't decided</h2>
+<ul>
+  <li>Which four insider tips go on the About page in their final form (you confirmed the themes; exact wording still open).</li>
+  <li>Whether the "Add a listing" button text should be something softer — <em>"Suggest a listing"</em>, <em>"Found one? Add it"</em>, or similar.</li>
+  <li>Whether the partnership nudge sentence belongs under the chip row or as a tooltip on the chip itself.</li>
+  <li>Any employers specifically called out at the UCLA consulting fair last week that you want added by name.</li>
+</ul>
+
+<footer class="doc-foot">
+  Playbook · MHA Internships Dashboard · Oct 3, 2026 · v2 shipping tonight · v3 scoped and parked.
+</footer>
+
+</body>
+</html>
