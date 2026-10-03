@@ -1,25 +1,39 @@
-/* MHAinternshipwebsite — v1
-   Vanilla JS. No build. Hash routing. localStorage tracker.
+/* MHAinternshipwebsite — v2.2
+   Vanilla JS. Hash routing. localStorage tracker.
+   Data-driven filter options for Category + City.
 */
 
-const STORAGE_KEY = "mhaint.v1";
+const STORAGE_KEY = "mhaint.v2";
 const DEFAULT_STATE = { statuses: {}, reqs: {}, custom: {} };
-const REQ_KEYS = (list) => list.map((_, i) => "r" + i); // requirement index → key
+const JUST_ADDED_DAYS = 14;
+
+const CATEGORY_LABELS = {
+  consulting: "Consulting",
+  operations_admin: "Operations & admin",
+  pharma_biotech: "Pharma & biotech",
+  payers_insurance: "Payers & insurance",
+  healthcare_tech: "Healthcare tech",
+  product_analytics: "Product & analytics",
+  policy_public_health: "Policy & public health",
+  postgrad_fellowship: "Post-grad fellowship",
+};
+
+const PATHWAY_LABELS = {
+  undergrad: "Undergrad pathway",
+  advanced_degree: "Advanced-degree pathway",
+};
 
 let LISTINGS = [];
 let STATE = loadState();
 let FILTERS = {
   category: "all",
   window: "all",
+  format: "all",
   status: "all",
-  postgrad: false,
-  mode: "all",
+  city: "all",
   paid: "all",
-  year: "all",
-  travel: "all",
 };
 
-// ---------- Boot ----------
 document.addEventListener("DOMContentLoaded", async () => {
   wireFilters();
   wireModal();
@@ -37,15 +51,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  populateDynamicFilters();
   render();
   route();
 });
 
-// ---------- State ----------
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return structuredClone(DEFAULT_STATE);
+    if (!raw) {
+      const v1 = localStorage.getItem("mhaint.v1");
+      if (v1) return JSON.parse(v1);
+      return structuredClone(DEFAULT_STATE);
+    }
     const s = JSON.parse(raw);
     return { ...structuredClone(DEFAULT_STATE), ...s };
   } catch {
@@ -59,7 +77,7 @@ function saveState() {
 
 function statusFor(id) { return STATE.statuses[id] || null; }
 function setStatus(id, s) {
-  if (!s) delete STATE.statuses[id];
+  if (!s || s === "none") delete STATE.statuses[id];
   else STATE.statuses[id] = s;
   saveState();
   render();
@@ -86,6 +104,13 @@ function addCustomReq(id, text) {
 }
 
 // ---------- Routing ----------
+function currentView() {
+  const hash = location.hash || "#browse";
+  if (hash.startsWith("#dashboard")) return "dashboard";
+  if (hash.startsWith("#about")) return "about";
+  return "browse";
+}
+
 function route() {
   const hash = location.hash || "#browse";
   const views = ["browse", "dashboard", "about"];
@@ -109,70 +134,133 @@ function route() {
   if (openId) openModal(openId);
   else closeModal();
 
-  // Hide the headline on About view (it's the list-only orientation)
-  document.getElementById("headline").hidden = view === "about";
+  renderHeadline(); // re-render headline on view change (hides on about + empty-dashboard)
 }
 
-// ---------- Filters ----------
+// ---------- Dynamic filter population ----------
+function populateDynamicFilters() {
+  const presentCats = new Set(LISTINGS.map((l) => l.category).filter(Boolean));
+  const catSel = document.getElementById("f-category");
+
+  // "In-program" and "All" are already in the HTML. Add Post-grad next (if present), then the rest.
+  if (presentCats.has("postgrad_fellowship")) {
+    const opt = document.createElement("option");
+    opt.value = "postgrad_fellowship";
+    opt.textContent = CATEGORY_LABELS.postgrad_fellowship;
+    catSel.appendChild(opt);
+  }
+  Object.keys(CATEGORY_LABELS).forEach((k) => {
+    if (k === "postgrad_fellowship") return;
+    if (presentCats.has(k)) {
+      const opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = CATEGORY_LABELS[k];
+      catSel.appendChild(opt);
+    }
+  });
+
+  const cityCounts = new Map();
+  LISTINGS.forEach((l) => {
+    (l.locations || []).forEach((loc) => {
+      const city = loc.city || "Unknown";
+      cityCounts.set(city, (cityCounts.get(city) || 0) + 1);
+    });
+  });
+  const citySel = document.getElementById("f-city");
+  const sortedCities = [...cityCounts.keys()].sort((a, b) => a.localeCompare(b));
+  sortedCities.forEach((c) => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c + ` (${cityCounts.get(c)})`;
+    citySel.appendChild(opt);
+  });
+}
+
 function wireFilters() {
-  const bind = (id, key, transform) => {
+  const bind = (id, key) => {
     const el = document.getElementById(id);
+    if (!el) return;
     el.addEventListener("change", () => {
-      FILTERS[key] = transform ? transform(el) : el.value;
+      FILTERS[key] = el.value;
       render();
     });
   };
   bind("f-category", "category");
   bind("f-window", "window");
+  bind("f-format", "format");
   bind("f-status", "status");
-  bind("f-postgrad", "postgrad", (el) => el.checked);
-  bind("f-mode", "mode");
+  bind("f-city", "city");
   bind("f-paid", "paid");
-  bind("f-year", "year");
-  bind("f-travel", "travel");
 
   const moreBtn = document.getElementById("more-filters-btn");
   const morePanel = document.getElementById("more-filters");
-  moreBtn.addEventListener("click", () => {
-    const open = !morePanel.hidden;
-    morePanel.hidden = open;
-    moreBtn.setAttribute("aria-expanded", String(!open));
-    moreBtn.textContent = open ? "More filters" : "Fewer filters";
-  });
+  if (moreBtn && morePanel) {
+    moreBtn.addEventListener("click", () => {
+      const open = !morePanel.hidden;
+      morePanel.hidden = open;
+      moreBtn.setAttribute("aria-expanded", String(!open));
+      moreBtn.textContent = open ? "More filters" : "Fewer filters";
+    });
+  }
 }
 
 function filteredListings() {
   const now = new Date();
   return LISTINGS
     .filter((l) => {
-      if (!FILTERS.postgrad && l.mha_year_required === "post_graduate") return false;
-      if (FILTERS.category !== "all" && l.category !== FILTERS.category) return false;
-      if (FILTERS.mode !== "all" && l.work_mode !== FILTERS.mode) return false;
+      // Category — "in_program" is a sentinel meaning "hide post-grad"
+      if (FILTERS.category === "in_program") {
+        if (l.category === "postgrad_fellowship") return false;
+      } else if (FILTERS.category !== "all" && l.category !== FILTERS.category) {
+        return false;
+      }
+      if (FILTERS.format !== "all" && l.format !== FILTERS.format) return false;
       if (FILTERS.paid !== "all" && l.paid !== FILTERS.paid) return false;
-      if (FILTERS.year !== "all" && l.mha_year_required !== FILTERS.year) return false;
 
-      if (FILTERS.travel === "yes-or-na" &&
-        !(l.conference_travel_covered === "yes" || l.conference_travel_covered === "not_applicable")) return false;
-      if (FILTERS.travel === "hide-no" && l.conference_travel_covered === "no") return false;
-
-      if (FILTERS.window !== "all") {
-        const days = daysUntil(l.application_deadline, now);
-        const limit = parseInt(FILTERS.window, 10);
-        if (days === null || days > limit) return false;
+      if (FILTERS.city !== "all") {
+        const cities = (l.locations || []).map((x) => x.city);
+        if (!cities.includes(FILTERS.city)) return false;
       }
 
-      if (FILTERS.status !== "all") {
-        const st = statusFor(l.id);
-        if (FILTERS.status === "untracked") { if (st) return false; }
-        else if (st !== FILTERS.status) return false;
+      const d = daysUntil(l.application_deadline, now);
+      const isClosed = d !== null && d < 0;
+      const isRolling = !!l.rolling;
+      const isOpen = !isClosed;
+
+      switch (FILTERS.window) {
+        case "all": break;
+        case "open":   if (!isOpen) return false; break;
+        case "rolling":if (!isRolling) return false; break;
+        case "closed": if (!isClosed) return false; break;
+        case "30":     if (d === null || d < 0 || d > 30) return false; break;
+        case "60":     if (d === null || d < 0 || d > 60) return false; break;
+        case "90":     if (d === null || d < 0 || d > 90) return false; break;
       }
       return true;
     })
-    .sort((a, b) => {
-      const da = a.application_deadline || "9999-12-31";
-      const db = b.application_deadline || "9999-12-31";
-      return da.localeCompare(db);
-    });
+    .sort(sortByDeadline);
+}
+
+function sortByDeadline(a, b) {
+  const now = new Date();
+  const da = a.application_deadline;
+  const db = b.application_deadline;
+  const aClosed = da && daysUntil(da, now) < 0;
+  const bClosed = db && daysUntil(db, now) < 0;
+
+  if (aClosed && !bClosed) return 1;
+  if (!aClosed && bClosed) return -1;
+
+  if (da && db) return da.localeCompare(db);
+  if (da && !db) return -1;
+  if (!da && db) return 1;
+  return 0;
+}
+
+function isJustAdded(listing) {
+  if (!listing.added_at) return false;
+  const d = daysUntil(listing.added_at);
+  return d !== null && d >= -JUST_ADDED_DAYS && d <= 0;
 }
 
 // ---------- Rendering ----------
@@ -184,13 +272,34 @@ function render() {
 }
 
 function renderHeadline() {
+  const view = currentView();
+  const headlineEl = document.getElementById("headline");
+
+  // Headline never shows on About.
+  if (view === "about") { headlineEl.hidden = true; return; }
+
   const now = new Date();
-  // Prefer tracked listings; else the earliest overall
-  const tracked = LISTINGS.filter((l) => {
+  // On Dashboard the headline uses only Considering + Application in progress.
+  // On Browse the pool is tracked (any non-archive) if any, else all.
+  const dashboardPool = LISTINGS.filter((l) => {
     const s = statusFor(l.id);
-    return s && s !== "passed";
+    return s === "considering" || s === "in_progress";
   });
-  const pool = tracked.length ? tracked : LISTINGS;
+  const trackedAny = LISTINGS.filter((l) => {
+    const s = statusFor(l.id);
+    return s && s !== "archive";
+  });
+
+  if (view === "dashboard" && dashboardPool.length === 0) {
+    headlineEl.hidden = true;
+    return;
+  }
+  headlineEl.hidden = false;
+
+  const pool = view === "dashboard"
+    ? dashboardPool
+    : (trackedAny.length ? trackedAny : LISTINGS);
+
   const upcoming = pool
     .map((l) => ({ l, d: daysUntil(l.application_deadline, now) }))
     .filter((x) => x.d !== null && x.d >= 0)
@@ -198,17 +307,23 @@ function renderHeadline() {
 
   const el = document.getElementById("next-deadline");
   const sub = document.getElementById("next-deadline-sub");
+
   if (!upcoming.length) {
-    el.innerHTML = "No upcoming deadlines <em>in range</em>.";
-    sub.textContent = "Check the browse list or widen your filters.";
+    if (view === "dashboard") {
+      el.innerHTML = "No upcoming deadlines <em>on tracked programs</em>.";
+      sub.textContent = "Mark more programs as Considering or Application in progress to see them here.";
+    } else {
+      el.innerHTML = "No upcoming dated deadlines <em>in range</em>.";
+      sub.textContent = "Check the full list — some programs are rolling or undated.";
+    }
     return;
   }
+
   const { l, d } = upcoming[0];
   const days = d === 0 ? "today" : d === 1 ? "in <em>1 day</em>" : `in <em>${d} days</em>`;
-  el.innerHTML = `${escapeHtml(l.title)} — ${days}`;
-  sub.textContent = tracked.length
-    ? `From your tracked programs. ${dateFmt(l.application_deadline)}.`
-    : `Earliest deadline on the list. ${dateFmt(l.application_deadline)}.`;
+  // Employer name picks up the accent green (same emphasis as "N days").
+  el.innerHTML = `${escapeHtml(l.title)} <span style="color:var(--accent-strong);font-size:0.85em;">·&nbsp;${escapeHtml(l.organization)}</span> — ${days}`;
+  sub.textContent = `Upcoming deadline — ${dateFmt(l.application_deadline)}.`;
 }
 
 function renderList() {
@@ -238,45 +353,78 @@ function fillRow(node, l) {
   node.querySelector(".title").textContent = l.title;
   node.querySelector(".org").textContent = "· " + l.organization;
 
-  const cat = node.querySelector(".cat");
-  cat.textContent = l.category === "mha_admin" ? "MHA admin" : "Health tech";
-  const loc = node.querySelector(".loc");
-  loc.textContent = (l.locations || []).map((x) => x.city).join(" / ") || "—";
-  const mode = node.querySelector(".mode");
-  mode.textContent = l.work_mode;
+  node.querySelector(".cat").textContent = CATEGORY_LABELS[l.category] || l.category || "—";
+  node.querySelector(".loc").textContent = (l.locations || []).map((x) => x.city).join(" / ") || "—";
+  node.querySelector(".mode").textContent = l.format || "—";
 
-  const ucla = node.querySelector(".ucla");
-  if (l.ucla_history === "hosted_ucla_alum") {
-    ucla.textContent = "UCLA alum hosted";
-    ucla.hidden = false;
-  } else if (l.ucla_history === "ucla_recruited") {
-    ucla.textContent = "UCLA-recruited";
-    ucla.hidden = false;
+  // Just-added chip (first-position; shows for 14 days after added_at)
+  if (isJustAdded(l)) {
+    node.querySelector(".just-added").hidden = false;
   }
 
-  const stale = node.querySelector(".stale");
-  if (isStale(l)) stale.hidden = false;
+  // Partnership chip + nudge
+  const partnership = node.querySelector(".partnership");
+  const partnershipNudge = node.querySelector(".partnership-nudge");
+  if (l.partnership === "specific") {
+    partnership.textContent = "Partnership specific";
+    partnership.classList.add("partnership-specific");
+    partnership.hidden = false;
+    partnershipNudge.textContent = "Verify your school is on their recruiting list — contact your MHA program's career center.";
+    partnershipNudge.hidden = false;
+  } else if (l.partnership === "unknown") {
+    partnership.textContent = "Partnership unknown";
+    partnership.classList.add("partnership-unknown");
+    partnership.hidden = false;
+  }
 
-  // Deadline
+  // Pathway chip + nudge (consulting dual-listings)
+  const pathwayChip = node.querySelector(".pathway-chip");
+  const pathwayNudge = node.querySelector(".pathway-nudge");
+  if (l.pathway === "undergrad" || l.pathway === "advanced_degree") {
+    pathwayChip.textContent = PATHWAY_LABELS[l.pathway];
+    pathwayChip.classList.add("pathway");
+    pathwayChip.hidden = false;
+    pathwayNudge.textContent = "Requirement: confirm MHA eligibility with your campus career center and/or a firm recruiter before applying — the firm decides.";
+    pathwayNudge.hidden = false;
+  }
+
+  // Link-pending chip
+  if (l.link_status === "pending" || l.link_status === "broken") {
+    node.querySelector(".link-pending").hidden = false;
+  }
+
+  // Deadline block
   const now = new Date();
   const d = daysUntil(l.application_deadline, now);
   const days = node.querySelector(".days");
   const date = node.querySelector(".deadline-date");
-  if (d === null) {
-    days.textContent = "TBD";
-  } else if (d < 0) {
+  const closedChip = node.querySelector(".closed-chip");
+
+  if (d !== null && d < 0) {
     days.textContent = "closed";
-    days.classList.add("overdue");
+    days.classList.add("closed");
+    const next = l.next_projected_month;
+    date.textContent = next ? `Next window: ${next}` : "next window TBD";
+    closedChip.hidden = false;
+  } else if (l.rolling) {
+    days.textContent = "rolling";
+    days.classList.add("rolling");
+    date.textContent = "ongoing";
+  } else if (d === null) {
+    days.textContent = "open";
+    days.classList.add("rolling");
+    date.textContent = "undated";
   } else if (d === 0) {
     days.textContent = "today";
     days.classList.add("urgent");
+    date.textContent = dateFmt(l.application_deadline);
   } else {
     days.textContent = `in ${d} day${d === 1 ? "" : "s"}`;
     if (d <= 14) days.classList.add("urgent");
+    date.textContent = dateFmt(l.application_deadline);
   }
-  date.textContent = l.application_deadline ? dateFmt(l.application_deadline) : "";
 
-  // Stroke
+  // Stroke progress
   const { done, total } = reqsFor(l.id, l);
   const status = statusFor(l.id);
   const fill = node.querySelector(".stroke-fill");
@@ -284,29 +432,29 @@ function fillRow(node, l) {
   const frac = total > 0 ? Math.min(done / total, 1) : 0;
   const y2 = 10 + frac * 48;
   fill.setAttribute("y2", y2);
-  const submitted = status && ["applied","interviewing","offer"].includes(status);
+  const submitted = status && ["applied","interviewing"].includes(status);
   cap.setAttribute("r", submitted ? 3.5 : 0);
-  if (status === "passed") {
-    node.style.opacity = "0.55";
-  }
+  if (status === "archive") node.style.opacity = "0.55";
 }
 
 function renderDashboard() {
   const groups = [
     ["considering", "Considering"],
+    ["in_progress", "Application in progress"],
     ["applied", "Applied"],
     ["interviewing", "Interviewing"],
-    ["offer", "Offer"],
-    ["passed", "Passed"],
+    ["archive", "Archive"],
   ];
   const host = document.getElementById("dash-groups");
   host.innerHTML = "";
   const template = document.getElementById("row-template");
+  const statusFilter = FILTERS.status;
 
   groups.forEach(([key, label]) => {
+    if (statusFilter !== "all" && statusFilter !== key) return;
     const items = LISTINGS
       .filter((l) => statusFor(l.id) === key)
-      .sort((a, b) => (a.application_deadline || "").localeCompare(b.application_deadline || ""));
+      .sort(sortByDeadline);
     const section = document.createElement("section");
     section.className = "dash-group";
     const h = document.createElement("h3");
@@ -316,7 +464,7 @@ function renderDashboard() {
       const p = document.createElement("p");
       p.className = "dash-empty";
       p.textContent = key === "considering"
-        ? "Open a listing and pick a status to track it."
+        ? "Open a listing on Browse and pick a status to track it."
         : "Nothing here yet.";
       section.appendChild(p);
     } else {
@@ -337,7 +485,7 @@ function renderDashboard() {
 function renderNavBadge() {
   const count = LISTINGS.filter((l) => {
     const s = statusFor(l.id);
-    return s && s !== "passed";
+    return s && s !== "archive";
   }).length;
   const badge = document.getElementById("nav-badge");
   if (count > 0) {
@@ -367,22 +515,13 @@ function openModal(id) {
   modal.hidden = false;
   document.body.style.overflow = "hidden";
   modal.querySelector(".modal-panel").focus();
-
-  // Wire status
-  body.querySelectorAll('input[name="status"]').forEach((r) => {
-    r.addEventListener("change", () => {
-      setStatus(id, r.value === "none" ? null : r.value);
-      body.innerHTML = detailHtml(listing);
-      wireModalBody(body, listing);
-    });
-  });
   wireModalBody(body, listing);
 }
 
 function wireModalBody(body, listing) {
   body.querySelectorAll('input[name="status"]').forEach((r) => {
     r.addEventListener("change", () => {
-      setStatus(listing.id, r.value === "none" ? null : r.value);
+      setStatus(listing.id, r.value);
       body.innerHTML = detailHtml(listing);
       wireModalBody(body, listing);
     });
@@ -421,16 +560,21 @@ function wireModalBody(body, listing) {
 function detailHtml(l) {
   const now = new Date();
   const d = daysUntil(l.application_deadline, now);
-  const dstr = d === null ? "TBD" : d < 0 ? "closed" : d === 0 ? "today" : `in ${d} day${d === 1 ? "" : "s"}`;
+  let dstr;
+  if (d !== null && d < 0) dstr = l.next_projected_month ? `closed · next window ${l.next_projected_month}` : "closed";
+  else if (l.rolling) dstr = "rolling (ongoing)";
+  else if (d === null) dstr = "open · undated";
+  else if (d === 0) dstr = "today";
+  else dstr = `in ${d} day${d === 1 ? "" : "s"}`;
 
   const st = statusFor(l.id) || "none";
   const statuses = [
-    ["none","Untracked"],
-    ["considering","Considering"],
-    ["applied","Applied"],
-    ["interviewing","Interviewing"],
-    ["offer","Offer"],
-    ["passed","Passed"],
+    ["none", "Untracked"],
+    ["considering", "Considering"],
+    ["in_progress", "Application in progress"],
+    ["applied", "Applied"],
+    ["interviewing", "Interviewing"],
+    ["archive", "Archive"],
   ];
 
   const reqs = (l.other_requirements || []).slice();
@@ -441,42 +585,67 @@ function detailHtml(l) {
     ...customs.map((r, i) => ({ key: "c" + i, text: r })),
   ];
 
-  const stale = isStale(l);
+  const partnershipChip = l.partnership === "specific"
+    ? '<span class="chip partnership-specific">Partnership specific</span>'
+    : l.partnership === "unknown"
+      ? '<span class="chip partnership-unknown">Partnership unknown</span>'
+      : "";
+  const partnershipNudge = l.partnership === "specific"
+    ? '<p class="partnership-nudge">Verify your school is on their recruiting list — contact your MHA program\'s career center.</p>'
+    : "";
+
+  const pathwayChip = (l.pathway === "undergrad" || l.pathway === "advanced_degree")
+    ? `<span class="chip pathway">${PATHWAY_LABELS[l.pathway]}</span>`
+    : "";
+  const pathwayNudge = (l.pathway === "undergrad" || l.pathway === "advanced_degree")
+    ? `<p class="pathway-nudge">Requirement: confirm MHA eligibility with your campus career center and/or a firm recruiter before applying — the firm decides.</p>`
+    : "";
+
+  const justAddedChip = isJustAdded(l) ? '<span class="chip just-added">Just added</span>' : "";
+  const linkPendingChip = (l.link_status === "pending" || l.link_status === "broken")
+    ? '<span class="chip link-pending">Link pending</span>' : "";
+
+  // Button label depends on url_kind: generic = Company website, program = Program page.
+  // Pending link overrides both with a disabled badge.
+  let postingButton;
+  if (l.link_status === "pending" || l.link_status === "broken") {
+    postingButton = `<span class="button pending">Link pending — re-verifying</span>
+       <span class="pending-note">Last checked ${dateFmt(l.link_last_checked || l.last_verified)} · we're re-checking the source.</span>`;
+  } else {
+    const label = l.url_kind === "program" ? "Program page ↗" : "Company website ↗";
+    postingButton = `<a class="button" href="${escapeAttr(l.source_url)}" target="_blank" rel="noopener">${label}</a>`;
+  }
 
   return `
     <h2 class="detail-title">${escapeHtml(l.title)}</h2>
     <p class="detail-org">${escapeHtml(l.organization)}${l.program_partner ? " · " + escapeHtml(l.program_partner) : ""}</p>
 
     <div class="detail-meta">
-      <span class="chip">${l.category === "mha_admin" ? "MHA admin" : "Health tech · non-tech"}</span>
+      ${justAddedChip}
+      <span class="chip">${escapeHtml(CATEGORY_LABELS[l.category] || l.category || "")}</span>
       <span class="chip">${(l.locations||[]).map((x)=>escapeHtml(x.city)).join(" / ")}</span>
-      <span class="chip">${escapeHtml(l.work_mode)}</span>
+      <span class="chip">${escapeHtml(l.format || "")}</span>
       <span class="chip">${escapeHtml(l.duration || "")}</span>
-      ${l.ucla_history === "hosted_ucla_alum" ? '<span class="chip ucla">UCLA alum hosted</span>' : ""}
-      ${l.ucla_history === "ucla_recruited" ? '<span class="chip ucla">UCLA-recruited</span>' : ""}
-      ${stale ? '<span class="chip stale">verify — data may be stale</span>' : ""}
+      ${partnershipChip}
+      ${pathwayChip}
+      ${linkPendingChip}
     </div>
+    ${partnershipNudge}
+    ${pathwayNudge}
 
     <div class="detail-block">
       <dt>Deadline</dt>
-      <dd><strong>${dstr}</strong> · ${dateFmt(l.application_deadline)}${l.deadline_note ? " · " + escapeHtml(l.deadline_note) : ""}</dd>
+      <dd><strong>${dstr}</strong>${l.application_deadline ? " · " + dateFmt(l.application_deadline) : ""}${l.deadline_note ? " · " + escapeHtml(l.deadline_note) : ""}</dd>
 
-      <dt>Program start</dt>
-      <dd>${l.program_start ? dateFmt(l.program_start) : "—"}</dd>
+      ${l.timing_guidance ? `<dt>Timing</dt><dd>${escapeHtml(l.timing_guidance)}</dd>` : ""}
 
       <dt>Pay</dt>
       <dd>${escapeHtml(l.paid || "unknown")}${l.compensation_note ? " · " + escapeHtml(l.compensation_note) : ""}</dd>
 
-      <dt>MHA year needed</dt>
-      <dd>${prettyYear(l.mha_year_required)}</dd>
-
-      <dt>Conference travel covered</dt>
-      <dd>${escapeHtml(l.conference_travel_covered || "unknown")}</dd>
-
       ${l.notes ? `<dt>Notes</dt><dd>${escapeHtml(l.notes)}</dd>` : ""}
 
       <dt>Last verified</dt>
-      <dd>${dateFmt(l.last_verified)}${stale ? " — <span style=\"color:var(--warn)\">stale</span>" : ""}</dd>
+      <dd>${dateFmt(l.last_verified)}</dd>
     </div>
 
     <div class="detail-block">
@@ -506,7 +675,7 @@ function detailHtml(l) {
     </div>
 
     <div class="detail-actions">
-      <a class="button" href="${escapeAttr(l.source_url)}" target="_blank" rel="noopener">Open source ↗</a>
+      ${postingButton}
       <button id="share-btn" class="ghost" type="button">Copy share link</button>
       <span class="share-msg"></span>
     </div>
@@ -524,9 +693,9 @@ function closeModal() {
   }
 }
 
-// ---------- Import / Export ----------
 function wireIO() {
-  document.getElementById("btn-export").addEventListener("click", () => {
+  const exp = document.getElementById("btn-export");
+  if (exp) exp.addEventListener("click", () => {
     const blob = new Blob([JSON.stringify(STATE, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -535,7 +704,8 @@ function wireIO() {
     document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
   });
-  document.getElementById("file-import").addEventListener("change", async (e) => {
+  const imp = document.getElementById("file-import");
+  if (imp) imp.addEventListener("change", async (e) => {
     const f = e.target.files[0]; if (!f) return;
     try {
       const text = await f.text();
@@ -547,14 +717,14 @@ function wireIO() {
       alert("Import failed: " + err.message);
     }
   });
-  document.getElementById("btn-clear").addEventListener("click", () => {
+  const clr = document.getElementById("btn-clear");
+  if (clr) clr.addEventListener("click", () => {
     if (!confirm("Clear all tracking? This wipes statuses, checked requirements, and custom items in this browser.")) return;
     STATE = structuredClone(DEFAULT_STATE);
     saveState(); render();
   });
 }
 
-// ---------- Utils ----------
 function daysUntil(iso, now = new Date()) {
   if (!iso) return null;
   const d = new Date(iso + "T00:00:00");
@@ -567,21 +737,6 @@ function dateFmt(iso) {
   const d = new Date(iso + "T00:00:00");
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
-}
-function isStale(l) {
-  if (!l.last_verified) return false;
-  const limit = l.stale_after_days || 45;
-  const d = daysUntil(l.last_verified);
-  return d !== null && d <= -limit;
-}
-function prettyYear(y) {
-  return ({
-    mha_year_1: "MHA Year 1",
-    mha_year_2: "MHA Year 2",
-    either: "Either year",
-    post_graduate: "Post-graduate",
-    unknown: "Unknown",
-  })[y] || y;
 }
 function escapeHtml(s) {
   if (s == null) return "";
