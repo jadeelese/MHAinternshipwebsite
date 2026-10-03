@@ -1,14 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#faf8f4"/>
   <g transform="translate(80,80)">
-    <line x1="12" y1="20" x2="12" y2="470" stroke="#2774ae" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="12" cy="14" r="8" fill="#2774ae"/>
+    <line x1="12" y1="20" x2="12" y2="470" stroke="#3d5a3d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="12" cy="14" r="8" fill="#3d5a3d"/>
   </g>
   <g transform="translate(140,120)" fill="#171613" font-family="Georgia, 'Iowan Old Style', serif">
-    <text font-size="24" fill="#6b6862" letter-spacing="3" font-family="Helvetica, Arial, sans-serif">MHA INTERNSHIPS · UCLA</text>
-    <text y="90" font-size="72" font-weight="500" letter-spacing="-1">The list you should</text>
-    <text y="180" font-size="72" font-weight="500" letter-spacing="-1">actually apply to</text>
-    <text y="270" font-size="72" font-weight="500" letter-spacing="-1" font-style="italic" fill="#1d5c8a">this year.</text>
-    <text y="380" font-size="26" fill="#6b6862" font-family="Helvetica, Arial, sans-serif">Tracked from deadline to offer.</text>
+    <text font-size="22" fill="#6b6862" letter-spacing="3" font-family="Helvetica, Arial, sans-serif">MHA INTERNSHIPS &amp; FELLOWSHIPS · CA</text>
+    <text y="100" font-size="60" font-weight="500" letter-spacing="-1">The list, by deadline.</text>
+    <text y="190" font-size="60" font-weight="500" letter-spacing="-1" font-style="italic" fill="#2d4a2d">For California MHA students.</text>
+    <text y="310" font-size="24" fill="#6b6862" font-family="Helvetica, Arial, sans-serif">Fellowships, internships, deadlines. Submissions reviewed.</text>
   </g>
 </svg>

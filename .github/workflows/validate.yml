@@ -1,0 +1,22 @@
+name: Validate listings
+on:
+  pull_request: {}
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+jobs:
+  validate:
+    # Skip bot commits (loop protection)
+    if: "!contains(github.event.head_commit.message, '[linkcheck-bot]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Schema + rules
+        run: node scripts/validate-listings.mjs listings.json
+      - name: Link check (hard failures only)
+        env:
+          CHECK_LINKS: "1"
+        run: node scripts/validate-listings.mjs listings.json
