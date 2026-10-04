@@ -37,7 +37,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["Portal application","CV","Transcript","Personal statement","3 letters of recommendation","Interview"],
-      "source_url": "https://www.cedars-sinai.org/programs/administrative-fellowship.html", "url_kind": "program",
+      "source_url": "https://careers.cshs.org/administrative-fellowship-program/", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "kaiser-admin-fellowship", "title": "Administrative Fellowship", "organization": "Kaiser Permanente",
@@ -48,7 +48,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["Online application","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://about.kaiserpermanente.org/careers/students-and-graduates", "url_kind": "generic",
+      "source_url": "https://adminfellowship.kp.org/", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "stanford-health-admin-fellowship", "title": "Administrative Fellowship", "organization": "Stanford Health Care",
@@ -59,7 +59,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["Application form","CV","Transcript","Personal statement","3 letters of recommendation","Interview"],
-      "source_url": "https://stanfordhealthcare.org/for-patients-visitors/careers/administrative-fellowship-program.html", "url_kind": "program",
+      "source_url": "https://careers.stanfordhealthcare.org/administrative-fellowship-program", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "sharp-admin-fellowship", "title": "Administrative Fellowship", "organization": "Sharp HealthCare",
@@ -70,7 +70,7 @@
       "timing_guidance": "Apply fall of your final MHA year.",
       "partnership": "none", "tier": 1,
       "other_requirements": ["Application form","CV","Transcript","Personal statement","Letters of recommendation","Interview"],
-      "source_url": "https://www.sharp.com/careers/administrative-fellowship.cfm", "url_kind": "program",
+      "source_url": "https://www.sharp.com/interns-fellows", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "ucsf-health-admin-fellowship", "title": "Administrative Fellowship", "organization": "UCSF Health",
@@ -809,7 +809,7 @@
       "timing_guidance": "Apply winter for the following summer.",
       "partnership": "none", "tier": 2,
       "other_requirements": ["State application","CV","Transcript","Interview"],
-      "source_url": "https://www.cdph.ca.gov/Pages/Jobs.aspx", "url_kind": "program",
+      "source_url": "https://www.cdph.ca.gov/Programs/HRB", "url_kind": "program",
       "link_status": "ok", "link_last_checked": "2026-10-03", "last_verified": "2026-10-03", "added_at": "2026-09-15" },
 
     { "id": "la-county-dhs-intern", "title": "Administrative Internship", "organization": "LA County Department of Health Services",
