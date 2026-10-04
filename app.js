@@ -1,4 +1,4 @@
-/* MHAinternshipwebsite — v2.2
+/* MHAinternshipwebsite — v2.5
    Vanilla JS. Hash routing. localStorage tracker.
    Data-driven filter options for Category + City.
 */
@@ -605,15 +605,15 @@ function detailHtml(l) {
   const linkPendingChip = (l.link_status === "pending" || l.link_status === "broken")
     ? '<span class="chip link-pending">Link pending</span>' : "";
 
-  // Button label depends on url_kind: generic = Company website, program = Program page.
-  // Pending link overrides both with a disabled badge.
+  // v2.5: Every source_url must land on a page that names the specific program (R11).
+  // Button label is therefore always "Program page". Pending/broken links show the
+  // disabled pending badge instead.
   let postingButton;
   if (l.link_status === "pending" || l.link_status === "broken") {
     postingButton = `<span class="button pending">Link pending — re-verifying</span>
        <span class="pending-note">Last checked ${dateFmt(l.link_last_checked || l.last_verified)} · we're re-checking the source.</span>`;
   } else {
-    const label = l.url_kind === "program" ? "Program page ↗" : "Company website ↗";
-    postingButton = `<a class="button" href="${escapeAttr(l.source_url)}" target="_blank" rel="noopener">${label}</a>`;
+    postingButton = `<a class="button" href="${escapeAttr(l.source_url)}" target="_blank" rel="noopener">Program page ↗</a>`;
   }
 
   return `
